@@ -9,12 +9,28 @@ final int gameover=5;
 //colours
 color black=#000000;
 color white=#FFFFFF;
+color red=#FF000D;
+color yellow=#F0D400;
+
+//target variables
+float x, y, d, vx, vy;
+
+int score, lives;
 
 
 void setup () {
   size (800, 800);
   mode=intro;
   textAlign (CENTER, CENTER);
+  strokeWeight (4);
+  //target variables
+  x=width/2;
+  y=height/2;
+  d=100;
+  vx=random (-5, 5);
+  vy=random (-5, 5);
+  score=0;
+  lives=3;
 }
 
 void draw () {

@@ -3,7 +3,7 @@ void intro () {
   theme.play ();
   background (0);
   textSize (90);
-  fill (white);
+  fill (yellow);
   text ("Clicker Game", 400, 300);
   
   //for the start button

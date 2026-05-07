@@ -25,7 +25,7 @@ color red=#FF000D;
 color yellow=#F0D400;
 
 //target variables
-float x, y, d, vx, vy;
+float x, y, d, vx, vy, slider;
 
 int score, lives;
 
@@ -43,6 +43,7 @@ void setup () {
   vy=random (-5, 5);
   score=0;
   lives=3;
+  slider=570;
   
   //sound
   minim=new Minim (this);//connecting sketch to Minim

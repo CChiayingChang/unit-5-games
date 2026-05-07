@@ -1,5 +1,6 @@
 //new tab so you don't have to scroll a bunch
 void intro () {
+  theme.play ();
   background (0);
   textSize (90);
   fill (white);
@@ -47,11 +48,15 @@ void intro () {
 }
 
 void introClick () {
-  if (mouseX>427 && mouseX<742 && mouseY>500 && mouseY<650) {
+  if (mouseX>427 && mouseX<742 && mouseY>500 && mouseY<650) {//option button
     mode=option;
+    click.rewind ();//rewinds the audio so it can play more than once
+    click.play ();
   }
-  if (mouseX>56 && mouseX<371 && mouseY>500 && mouseY<650) {
+  if (mouseX>56 && mouseX<371 && mouseY>500 && mouseY<650) {//start button
     mode=game;
+    click.rewind ();
+    click.play ();
   }
 }
 

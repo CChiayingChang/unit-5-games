@@ -27,8 +27,12 @@ if (mouseX>x-d/2 && mouseX<x+d/2 && mouseY>y-d/2 && mouseY<y+d/2) {//if distance
     vx=vx*1.5;
     vy=vy*1.5;
     score=score+1;
+    point.rewind ();
+    point.play ();
   } else {
     lives=lives-1;
+    loselife.rewind ();
+    loselife.play ();
   }
 }
 

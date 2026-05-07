@@ -1,3 +1,15 @@
+//import statements to connect sketch to library
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
+//sound variables
+Minim minim;
+AudioPlayer click, point, theme, lose, loselife;
+
 int mode;//keeps track of what screen youre on
 //the different variables for each screen
 final int intro=1; //final int locks the variable so that you don't accidentally change it later on-->will cause an error message if you try to change it
@@ -31,6 +43,14 @@ void setup () {
   vy=random (-5, 5);
   score=0;
   lives=3;
+  
+  //sound
+  minim=new Minim (this);//connecting sketch to Minim
+  click= minim.loadFile ("click.mp3");
+  point=minim.loadFile ("poinit.mp3");
+  theme=minim.loadFile ("theme.mp3");
+  lose=minim.loadFile ("gameover.mp3");
+  loselife=minim.loadFile ("loselife.mp3");
 }
 
 void draw () {

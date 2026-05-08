@@ -29,6 +29,13 @@ float x, y, d, vx, vy, slider;
 
 int score, lives;
 
+//images
+PImage pomni;
+PImage jax;
+int whatimage;
+
+float a= random (0, TWO_PI);//generates random angle
+
 
 void setup () {
   size (800, 800);
@@ -39,8 +46,8 @@ void setup () {
   x=width/2;
   y=height/2;
   d=100;
-  vx=random (-5, 5);
-  vy=random (-5, 5);
+  vx=random (5*cos(a));//generates random x angle
+  vy=random (5*sin(a));//generates random y angle
   score=0;
   lives=3;
   slider=570;
@@ -52,6 +59,12 @@ void setup () {
   theme=minim.loadFile ("theme.mp3");
   lose=minim.loadFile ("gameover.mp3");
   loselife=minim.loadFile ("loselife.mp3");
+  
+  //images
+  pomni= loadImage ("pomni.png");
+  jax= loadImage ("jax.png");
+  imageMode (CENTER);
+  whatimage=1;
 }
 
 void draw () {

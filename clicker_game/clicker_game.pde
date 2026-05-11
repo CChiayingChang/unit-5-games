@@ -1,4 +1,4 @@
-//import statements to connect sketch to library
+//import statements to connect sketch to library, for sound
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -27,11 +27,16 @@ color yellow=#F0D400;
 //target variables
 float x, y, d, vx, vy, slider;
 
-int score, lives;
+int score, lives, highscore;
 
 //images
 PImage pomni;
 PImage jax;
+PImage kinger;
+PImage title;
+PImage grassbackground;
+PImage gamebackground;
+PImage hallway;
 int whatimage;
 
 float a= random (0, TWO_PI);//generates random angle
@@ -63,6 +68,11 @@ void setup () {
   //images
   pomni= loadImage ("pomni.png");
   jax= loadImage ("jax.png");
+  kinger=loadImage ("kinger.png");
+  title=loadImage ("title.png");
+  grassbackground=loadImage ("grassbackground.jpeg");
+  gamebackground=loadImage ("gamebackground.jpg");
+  hallway=loadImage ("hallway.png");
   imageMode (CENTER);
   whatimage=1;
 }
@@ -80,5 +90,24 @@ void draw () {
     gameover ();
   } else {
     println ("Error: Mode = " + mode);
+  }
+}
+
+void tactilebutton (int xl, int xr, int yt, int yb) {//xleft, xright, ytop, ybottom
+  //the button outlines and fill with switch colours whehn the mouse hovers over it
+  if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
+    fill (yellow);
+    stroke (red);
+  } else {
+    fill(red);
+    stroke (yellow);
+  }
+}
+
+void tactiletext (int xl, int xr, int yt, int yb) {
+  if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
+    fill (red);
+  } else {
+    fill(yellow);
   }
 }

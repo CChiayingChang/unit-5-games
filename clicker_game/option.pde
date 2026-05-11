@@ -1,39 +1,25 @@
 void option () {
-  background (0);
+  noStroke ();
+  image (hallway, 400, 400, width, height);
+  fill (0, 185);//darkens background iamge
+  rect (0, 0, width, height);
   textSize (100);
   fill (yellow);
   text ("OPTIONS", 400, 100);
   //left button
-  if (mouseX>88 && mouseX<238 && mouseY>200 && mouseY<350) {
-  fill (yellow);
-  stroke (red);
-  } else {
-    fill (red);
-    stroke (yellow);
-  }
-  rect (88, 200, 150, 150);
+  tactilebutton (88, 238, 200, 350);
+  rect (88, 200, 150, 150, 10);
   image (pomni, 163, 275, 120*1.2, 120);
   
   //middle button
-  if (mouseX>326 && mouseX<476 && mouseY>200 && mouseY<350) {
-  fill (yellow);
-  stroke (red);
-  } else {
-    fill (red);
-    stroke (yellow);
-  }
-  rect (326, 200, 150, 150);
+  tactilebutton (326, 476, 200, 350);
+  rect (326, 200, 150, 150, 10);
   image (jax, 401, 275, 120*1.2, 120);
   
   //right button
-  if (mouseX>564 && mouseX<714 && mouseY>200 && mouseY<350) {
-  fill (yellow);
-  stroke (red);
-  } else {
-    fill (red);
-    stroke (yellow);
-  }
-  rect (564, 200, 150, 150);
+  tactilebutton (564, 714, 200, 350);
+  rect (564, 200, 150, 150, 10);
+  image (kinger, 639, 275, 120*1.2, 120);
   println (mouseX, mouseY);
   
   //slider
@@ -48,22 +34,21 @@ void option () {
   circle (167, slider, 40);
   
   //start button
-  if (mouseX>600 && mouseX<750 && mouseY>665 && mouseY<740) {
-    fill (yellow);
-    stroke (red);
-  } else {
-    fill (red);
-    stroke (yellow);
-  }
-  rect (600, 665, 150, 75);
+  tactilebutton (600, 750, 665, 740);
+  rect (600, 665, 150, 75, 10);
   textSize (50);
-  //text for start button
-  if (mouseX>600 && mouseX<750 && mouseY>665 && mouseY<740) {
-    fill (red);
-  } else {
-    fill (yellow);
-  }
+  tactiletext (600, 750, 665, 740);
   text ("START", 675, 700);
+  
+  //targets
+  if (whatimage==1) {
+    image (pomni, 400, 570, d*1.2, d);
+  } else if (whatimage==2) {
+    image (jax, 400, 570, d*1.2, d);
+  } else if (whatimage==3) {
+    image (kinger, 400, 570, d*1.2, d);
+  }
+  
 }
 
 void mousePressed () {
@@ -79,11 +64,22 @@ void moveslider () {
   //make sure it only works on option screen
     slider=mouseY;
   }
-  d=map (slider, 450, 700, 150, 50);//variable, range of slider, desired range
+  d=map(slider, 450, 700, 400, 50);//variable, range of slider, desired range
 }
 
 void optionClick () {
   if (mouseX>88 && mouseX<238 && mouseY>200 && mouseY<350) {
-    whatimage=1;//if you click on the clown button, the image will be a  clown
+    whatimage=1;//if you click on the right button, image will show ponmi (the jester)
+  }
+  if (mouseX>326 && mouseX<476 && mouseY>200 && mouseY<350) {
+    whatimage=2;//if you click on the middle button, the image will show jax (the purple bunny guy)
+  }
+  if (mouseX>564 && mouseX<714 && mouseY>200 && mouseY<350) {
+    whatimage=3;//if you click on right button, image will show kinger (chess piece guy)
+  }
+  
+  
+  if (mouseX>600 && mouseX<750 && mouseY>665 && mouseY<740) {
+    mode=game;
   }
 }

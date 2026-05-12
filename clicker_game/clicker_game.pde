@@ -37,6 +37,7 @@ PImage title;
 PImage grassbackground;
 PImage gamebackground;
 PImage hallway;
+PImage abstracted;
 int whatimage;
 
 float a= random (0, TWO_PI);//generates random angle
@@ -73,6 +74,7 @@ void setup () {
   grassbackground=loadImage ("grassbackground.jpeg");
   gamebackground=loadImage ("gamebackground.jpg");
   hallway=loadImage ("hallway.png");
+  abstracted=loadImage ("abstracted.jpg");
   imageMode (CENTER);
   whatimage=1;
 }

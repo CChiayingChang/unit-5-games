@@ -28,14 +28,18 @@ void game () {
   text ("Score:" + score, 700, 50);
   text ("Lives:" + lives, 100, 50);
   
-  if (lives==0) mode=gameover;//if you have one line of code, no need for the braces
+  if (lives<=0) mode=gameover;//if you have one line of code, no need for the braces
 }
 
 void pausebutton (int x, int y) {
   pushMatrix ();
     translate (x, y);
     fill (0);
-    stroke (yellow);
+    if (dist (mouseX, mouseY, 720, 720) <25) {//if you click on the pause button
+      stroke (red);
+    } else {
+      stroke (yellow);
+    }
     strokeWeight (5);
     circle (0, 0, 50);
     line (-7, -10, -7, 10);
@@ -61,5 +65,4 @@ void gameClick () {
   }
 }
 
-//add a restart button
 //add timer?

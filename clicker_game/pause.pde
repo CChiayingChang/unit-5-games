@@ -1,6 +1,7 @@
 void pause () {
   //don't do any background or anything here-->it will freeze the screen on the last image left behnd of the game
   play (720, 720);//play button
+  fill (yellow);
   textSize (150);
   text ("PAUSED", 400, 300);
   //leftbutton
@@ -21,30 +22,42 @@ void pause () {
 void pauseClick () {
   if (dist (mouseX, mouseY, 720, 720)<25) {
     mode=game;
-  }
-  if (mouseX>100 && mouseX<350 && mouseY>450 && mouseY<550) {
+  } else if (mouseX>100 && mouseX<350 && mouseY>450 && mouseY<550){//back to start button
     mode=intro;
-  }
-  if (mouseX>4550 && mouseX<700 && mouseY>450 && mouseY<550); {
+    lives=3;
+    score=0;
+    //resets speed
+    vx=random (5*cos(a));//generates random x angle
+    vy=random (5*sin(a));//generates random y angle
+  } else if (mouseX>450 && mouseX<700 && mouseY>450 && mouseY<550) {//restart button
     mode=game;
     lives=3;
     score=0;
+    vx=random (5*cos(a));//generates random x angle
+    vy=random (5*sin(a));//generates random y angle
   }
-  
 }
 
 void play (int x, int y) {//play button
   pushMatrix ();
     translate (x, y);
     fill (0);
-    stroke (yellow);
+    if (dist (mouseX, mouseY, 720, 720)<25) {//tactile
+      stroke (red);
+    } else {
+      stroke (yellow);
+    }
     strokeWeight (5);
+    fill (0);
     circle (0, 0, 50);
-    fill (yellow);
     noStroke ();
+    if (dist (mouseX, mouseY, 720, 720)<25) {//tactile
+      fill (red);
+    } else {
+      fill (yellow);
+    }
     triangle (-7, -10, 13, 0, -7, 10);
   popMatrix ();
 }
 
 //control music volume? change music?
-//make it so when you restart it the highscore doesn't save the score before you restart

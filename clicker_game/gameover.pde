@@ -1,8 +1,10 @@
 void gameover () {
+  //background image
   image (abstracted, 400, 400, width, height);
   fill (0, 200);
   noStroke ();
   rect (0, 0, width, height);
+  //text
   textSize (100);
   theme.pause ();
   lose.play ();
@@ -15,22 +17,31 @@ void gameover () {
   }
   text ("Highscore:" + highscore, 400, 500);
   println  (mouseX, mouseY);
-  tactilebutton (215, 585, 570, 660);
-  rect (215, 570, 370, 90);
-  tactiletext (215, 585, 570, 660);
-  textSize (80);
-  text ("RESTART", 400, 615);
+  //option buttons
+  //restart button
+  tactilebutton (100, 350, 570, 660);
+  rect (100, 570, 250, 90, 10);
+  tactiletext (100, 350, 570, 660);
+  textSize (50);
+  text ("RESTART", 225, 615);
+  
+  
+  //exit button
+  tactilebutton (450, 700, 570, 660);
+  rect (450, 570, 250, 90, 10);
+  tactiletext (450, 700, 570, 660);
+  text ("EXIT", 575, 615);
 }
 
 void gameoverClick () {
-  if (mouseX>215 && mouseX<585 && mouseY>570 && mouseY<660) {
+  if (mouseX>100 && mouseX<350 && mouseY>570 && mouseY<660) {//when you click on the restart button
     mode=intro;
     lives=3;//resets lives--> don't forget, or else when you start the game the lives will be 0 and youll be sent automatically back to gameover page
     score=0;
     slider=570;
     vx=random (5*cos(a));//generates random x angle
     vy=random (5*sin(a));//generates random y angle
-  } else {
-    mode=gameover;//if i don't add this for some reason if i click anywhere it automatially takes me back to intro screen
+  } else if (mouseX>450 && mouseX<700 && mouseY>570 && mouseY<660) {
+    exit ();//this makes the window close
   }
 }

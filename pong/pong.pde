@@ -10,10 +10,30 @@ final int gameover=5;
 float leftX, leftY, rightX, rightY, leftD, rightD;//paddles
 float ballX, ballY, ballD; //ball
 
+//keyboard variables
+boolean wKey, sKey, upKey, downKey;//use booleans for the keys so that theres no key repeat delay
+
 void setup () {
   size (1000, 700);
   mode=game;
   textAlign (CENTER);
+  
+  //paddles
+  leftX=0;
+  leftY=height/2;
+  leftD=200;
+  
+  rightX=width;
+  rightY=height/2;
+  rightD=200;
+  
+  //ball
+  ballX=width/2;
+  ballY=height/2;
+  ballD=50;
+  
+  //keyboard setup
+  wKey=sKey=upKey=downKey=false;
 }
 
 void draw () {

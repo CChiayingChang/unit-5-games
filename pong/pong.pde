@@ -13,6 +13,13 @@ float ballX, ballY, ballD; //ball
 //keyboard variables
 boolean wKey, sKey, upKey, downKey;//use booleans for the keys so that theres no key repeat delay
 
+//movement variables
+float a= random (0, TWO_PI);//generates random angle
+float vx;
+float vy;
+
+int leftscore, rightscore, timer;
+
 void setup () {
   size (1000, 700);
   mode=game;
@@ -34,6 +41,15 @@ void setup () {
   
   //keyboard setup
   wKey=sKey=upKey=downKey=false;
+  
+  //movement
+  vx=random (10*cos(a));//generates random x angle
+  vy=random (10*sin(a));//generates random y angle
+  textAlign (CENTER);
+  
+  rightscore=0;
+  leftscore=0;
+  timer=100;
 }
 
 void draw () {

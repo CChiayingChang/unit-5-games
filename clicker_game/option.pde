@@ -1,11 +1,14 @@
 void option () {
+  //background
   noStroke ();
   image (hallway, 400, 400, width, height);
   fill (0, 185);//darkens background iamge
   rect (0, 0, width, height);
+  
   textSize (100);
   fill (yellow);
   text ("OPTIONS", 400, 100);
+  
   //left button
   tactilebutton (88, 238, 200, 350);
   rect (88, 200, 150, 150, 10);
@@ -23,7 +26,7 @@ void option () {
   println (mouseX, mouseY);
   
   //slider
-  if (mouseX>147 && mouseX<187 && mouseY>430 && mouseY<720) {
+  if (mouseX>147 && mouseX<187 && mouseY>430 && mouseY<720) {//tactile
     stroke (red);
     fill (yellow);
   } else {
@@ -52,7 +55,11 @@ void option () {
 }
 
 void mousePressed () {
+  if (dist(mouseX, mouseY, 167, slider)<20 && mouseY>450 && mouseY<700 && mode==option) {
+    click ();//put this in mousepressed so when i move the slider, it plays the sound the moment you touch it and then doenst repeat the osund
+  }
   moveslider ();
+  
 }
 
 void mouseDragged () {
@@ -62,24 +69,28 @@ void mouseDragged () {
 void moveslider () {
   if (dist(mouseX, mouseY, 167, slider)<20 && mouseY>450 && mouseY<700 && mode==option) {//onyl works if the mouse is on slider line (y) and within 20 units (x)
   //make sure it only works on option screen
-    slider=mouseY;
+    slider=mouseY;//slider will move
   }
   d=map(slider, 450, 700, 400, 50);//variable, range of slider, desired range
 }
 
 void optionClick () {
+  //the target choices
   if (mouseX>88 && mouseX<238 && mouseY>200 && mouseY<350) {
     whatimage=1;//if you click on the right button, image will show ponmi (the jester)
+    click ();
   }
   if (mouseX>326 && mouseX<476 && mouseY>200 && mouseY<350) {
     whatimage=2;//if you click on the middle button, the image will show jax (the purple bunny guy)
+    click ();
   }
   if (mouseX>564 && mouseX<714 && mouseY>200 && mouseY<350) {
     whatimage=3;//if you click on right button, image will show kinger (chess piece guy)
+    click ();
   }
   
-  
-  if (mouseX>600 && mouseX<750 && mouseY>665 && mouseY<740) {
+  if (mouseX>600 && mouseX<750 && mouseY>665 && mouseY<740) {//if you start
     mode=game;
+    click ();
   }
 }

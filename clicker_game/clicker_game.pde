@@ -19,8 +19,6 @@ final int pause=4;
 final int gameover=5;
 
 //colours
-color black=#000000;
-color white=#FFFFFF;
 color red=#FF000D;
 color yellow=#F0D400;
 
@@ -34,6 +32,7 @@ PImage pomni;
 PImage jax;
 PImage kinger;
 PImage title;
+PImage heart;
 PImage grassbackground;
 PImage gamebackground;
 PImage hallway;
@@ -54,6 +53,7 @@ void setup () {
   d=100;
   vx=random (5*cos(a));//generates random x angle
   vy=random (5*sin(a));//generates random y angle
+  
   score=0;
   lives=3;
   slider=570;
@@ -75,12 +75,13 @@ void setup () {
   gamebackground=loadImage ("gamebackground.jpg");
   hallway=loadImage ("hallway.png");
   abstracted=loadImage ("abstracted.jpg");
+  heart=loadImage ("heart.png");
   imageMode (CENTER);
   whatimage=1;
 }
 
 void draw () {
-  if (mode==intro) {
+  if (mode==intro) {//for the mode framework
     intro ();
   } else if (mode==option) {//the if else acts as a chain--> if it meets one condition, it won't check for the other conditions, so theres only ever one screen
     option ();
@@ -96,7 +97,7 @@ void draw () {
 }
 
 void tactilebutton (int xl, int xr, int yt, int yb) {//xleft, xright, ytop, ybottom
-  //the button outlines and fill with switch colours whehn the mouse hovers over it
+  //the button outlines and fill will switch colours when the mouse hovers over it
   if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
     fill (yellow);
     stroke (red);
@@ -106,10 +107,15 @@ void tactilebutton (int xl, int xr, int yt, int yb) {//xleft, xright, ytop, ybot
   }
 }
 
-void tactiletext (int xl, int xr, int yt, int yb) {
+void tactiletext (int xl, int xr, int yt, int yb) {//the text of buttons will switch colours when you hover over it
   if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
     fill (red);
   } else {
     fill(yellow);
   }
+}
+
+void click () {
+  click.rewind ();//resets the audio so you can play it more than once
+  click.play ();
 }

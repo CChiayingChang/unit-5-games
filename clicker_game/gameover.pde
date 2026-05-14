@@ -1,9 +1,10 @@
 void gameover () {
   //background image
   image (abstracted, 400, 400, width, height);
-  fill (0, 200);
+  fill (0, 200);//makes the background image darker
   noStroke ();
   rect (0, 0, width, height);
+  
   //text
   textSize (100);
   theme.pause ();
@@ -11,13 +12,14 @@ void gameover () {
   fill (yellow);
   text ("GAMEOVER", 400, 300);
   textSize (50);
-  text ("Score:" + score, 400, 400);
+  text ("Score:" + score, 400, 400);//will display the high score
   if (score>highscore && lives==0) {//only activates when lives=0, so if you pause the game and restart or go back to intro, the highscore doesn't count
+    //if the score is higher than the highscore, then it will become the new highscore
     highscore=score;
   }
   text ("Highscore:" + highscore, 400, 500);
   println  (mouseX, mouseY);
-  //option buttons
+  
   //restart button
   tactilebutton (100, 350, 570, 660);
   rect (100, 570, 250, 90, 10);
@@ -41,7 +43,10 @@ void gameoverClick () {
     slider=570;
     vx=random (5*cos(a));//generates random x angle
     vy=random (5*sin(a));//generates random y angle
+    d=100;
+    click ();
   } else if (mouseX>450 && mouseX<700 && mouseY>570 && mouseY<660) {
     exit ();//this makes the window close
+    click ();
   }
 }

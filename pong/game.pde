@@ -2,13 +2,27 @@ void game () {
   background (0);
   //paddles
   circle (leftX, leftY, leftD);
-  circle (rightX, rightY, rightD);
+  rightD=leftD;
+  circle (rightX, rightY, rightD);//update-->for now, rightD is equal to leftD
   //move paddles
   //if (leftY>0+leftD/2 && leftY<height-leftD/2) {//don't use this, it will get stuck
   if (wKey==true) leftY=leftY-10; //when you press on w, boolean becomes true and paddle moves up
   if (sKey==true) leftY=leftY+10;//when you press on s, boolean becomes true and paddle moves up
-  if (upKey==true) rightY=rightY-10;
-  if (downKey==true) rightY=rightY+10;
+  if (onePlayer==false) {//two player mode-->can control right paddle with keyboard
+    if (upKey==true) rightY=rightY-10;
+    if (downKey==true) rightY=rightY+10;
+  } else {//one player mode
+    if (ballX>width/2) {//if the ball is on the right side
+      if (ballY<rightY) {//if ball is above the paddle, the paddle moves up
+        rightY=rightY-10;
+      } else if (ballY>rightY) {
+        rightY=rightY+5;
+      }
+    }
+  }
+  
+  
+  
   //paddle movement limits-->if it goes beyond the limit, it snaps back to the limit
   if (leftY<0+leftD/2) leftY=0+leftD/2;
   if (leftY>height-leftD/2) leftY=height-leftD/2;
@@ -72,3 +86,4 @@ void gameClick () {
 
 //ball might get stuck between walland paddle--fix
 //fix ball movemen-->sometimes gets stuck bouncing up and down
+//one player mode--> the right paddle vibrates

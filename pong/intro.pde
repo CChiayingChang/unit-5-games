@@ -5,22 +5,25 @@ void intro () {
   text ("PONG!", 500, 350);
   println (mouseX, mouseY);
   //1 player button
+  tactilebutton (190, 440, 460, 535);
   rect (190, 460, 250, 75);
-  fill (0);
+  tactiletext (190, 440, 460, 535);
   textSize (50);
   text ("1 player", 315, 510);
   //2 player button
-  fill (255);
+  tactilebutton (560, 810, 460, 535);
   rect (560, 460, 250, 75);
-  fill (0);
+  tactiletext (560, 810, 460, 535);
   text ("2 players", 685, 510);
 }
 
 void introClick () {
   if (mouseX>190 && mouseX<440 && mouseY>460 && mouseY<535) {//if you click on the one player button
     mode=options;
+    onePlayer=true;
   }
-  if (mouseX>560 && mouseX<910 && mouseY>460 && mouseY<535) {//if you click on the one player button
+  if (mouseX>560 && mouseX<910 && mouseY>460 && mouseY<535) {//if you click on the two player button
     mode=options;
+    onePlayer=false;
   }
 }

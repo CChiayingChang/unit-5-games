@@ -3,6 +3,7 @@ void mousePressed () {
     introClick ();
   } else if (mode==options) {
     optionsClick ();
+    slider ();
   } else if (mode==game) {
     gameClick ();
   } else if (mode==pause) {

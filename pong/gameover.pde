@@ -1,12 +1,23 @@
 void gameover () {
   background (0);
+  textSize (100);
   if (leftscore>rightscore) {
-    text ("left win", width/2, height/2);
+    text ("LEFT WIN", width/2, height/2);
   } else if (rightscore>leftscore) {
-    text ("rightwin", width/2, height/2);
+    text ("RIGHT WIN", width/2, height/2);
   }
+  
+  textSize (50);
+  tactilebutton (375, 625, 500, 575);
+  rect (375, 500, 250, 75);
+  tactiletext (375, 625, 500, 575);
+  text ("RESTART", 500, 550);
+  
+  println (mouseX, mouseY);
 }
 
 void gameoverClick () {
-  
+  if (mouseX>375 && mouseX<625 && mouseY>500 && mouseY<575) {
+    mode=intro;
+  }
 }

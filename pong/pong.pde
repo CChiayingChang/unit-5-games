@@ -6,6 +6,10 @@ final int game=3;
 final int pause=4;
 final int gameover=5;
 
+//colour palette
+color magenta=#E600F7;
+color blue=#03F4FF;
+
 //player variables
 float leftX, leftY, rightX, rightY, leftD, rightD;//paddles
 float ballX, ballY, ballD; //ball
@@ -14,16 +18,22 @@ float ballX, ballY, ballD; //ball
 boolean wKey, sKey, upKey, downKey;//use booleans for the keys so that theres no key repeat delay
 
 //movement variables
-float a= random (0, TWO_PI);//generates random angle
+float a= random (QUARTER_PI, HALF_PI+QUARTER_PI);//generates random angle
 float vx;
 float vy;
 
 int leftscore, rightscore, timer;
 
+float sliderY;
+float sliderY2;
+
+boolean onePlayer;
+
 void setup () {
   size (1000, 700);
-  mode=game;
+  mode=options;
   textAlign (CENTER);
+  strokeWeight (3);
   
   //paddles
   leftX=0;
@@ -50,6 +60,9 @@ void setup () {
   rightscore=0;
   leftscore=0;
   timer=100;
+  
+  sliderY=397;
+  sliderY2=397;
 }
 
 void draw () {
@@ -68,6 +81,30 @@ void draw () {
   }
 }
 
-void tactilebutton () {
-  
+void tactilebutton (int xl, int xr, int yt, int yb) {
+  if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb){
+    stroke (blue);
+    noFill ();
+  } else {
+    stroke (magenta);
+    noFill ();
+  }
+}
+
+void tactiletext (int xl, int xr, int yt, int yb) {
+  if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
+    fill (magenta);
+  } else {
+    fill (blue);
+  }
+}
+
+void tactileslider (int xl, int xr, int yt, int yb) {
+  if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
+    stroke (blue);
+    fill (blue);
+  } else {
+    stroke (magenta);
+    fill (magenta);
+  }
 }

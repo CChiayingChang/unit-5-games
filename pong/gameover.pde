@@ -14,6 +14,9 @@ void gameover () {
   text ("RESTART", 500, 550);
   
   println (mouseX, mouseY);
+  
+  //audio
+  win.play ();
 }
 
 void gameoverClick () {
@@ -21,5 +24,7 @@ void gameoverClick () {
     mode=intro;
     leftscore=0;
     rightscore=0;
+    click ();
+    randomDirection ();
   }
 }

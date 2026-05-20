@@ -61,25 +61,33 @@ void options () {
 }
 
 void optionsClick () {
-  if (mouseX>795 && mouseX<955 && mouseY>590 && mouseY<665) {
+  if (mouseX>795 && mouseX<955 && mouseY>590 && mouseY<665) {//click on start
     mode=game;
+    click ();
+    timer=100;
   }
   
+  //speed buttons
   if (mouseX>585 && mouseX<685 && mouseY>285 && mouseY<385) {
     speed=1;
+    click ();
   } else if (mouseX>705 && mouseX<805 && mouseY>285 && mouseY<385) {
     speed=2;
+    click ();
   } else if (mouseX>825 && mouseX<925 && mouseY>285 && mouseY<385) {
     speed=3;
+    click ();
   }
 }
 
 void slider () {
   if (dist(mouseX, mouseY, 100, sliderY) <13 && mode==options && mouseY>220 && mouseY<575) {
     sliderY=mouseY;
+    click ();
   }
   if (dist (mouseX, mouseY, 380, sliderY2) <13 && mode==options && mouseY>220 && mouseY<575) {
     sliderY2=mouseY;
+    click ();
   }
 }
 

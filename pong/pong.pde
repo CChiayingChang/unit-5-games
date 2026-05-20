@@ -26,7 +26,10 @@ float ballX, ballY, ballD; //ball
 boolean wKey, sKey, upKey, downKey;//use booleans for the keys so that theres no key repeat delay
 
 //movement variables
-float a= random (QUARTER_PI, HALF_PI+QUARTER_PI);//generates random angle
+float a= random (0, TWO_PI);//generates random angle
+//have 2 Y angle ranges-->one for left, one for right, so it can't generate any vertical moving balls (cause then it gets stuck bouncing up and down)
+float aYminus = random (HALF_PI+QUARTER_PI, PI+QUARTER_PI);
+float aYplus=random (TWO_PI+QUARTER_PI);
 float vx;
 float vy;
 
@@ -37,8 +40,9 @@ float sliderY2;
 
 boolean onePlayer;
 
-int speed;
-int howFast;
+int speed;//variabl changes depending on what speed option you choose
+int howFast; //the amount you add to speed depending on what speed option you chose
+float direction;
 
 //sound
 Minim minim;
@@ -46,7 +50,7 @@ AudioPlayer click, point, pingpong, win;//sound variables
 
 void setup () {
   size (1000, 700);
-  mode=options;
+  mode=intro;
   textAlign (CENTER);
   strokeWeight (3);
   
@@ -68,8 +72,9 @@ void setup () {
   wKey=sKey=upKey=downKey=false;
   
   //movement
-  vx=random (10*cos(a));//generates random x angle+the speed you chose
-  vy=random (10*sin(a));//generates random y angle+the speed you chose
+  randomDirection ();
+  
+  
   textAlign (CENTER);
   
   rightscore=0;
@@ -116,6 +121,7 @@ void tactilebutton (int xl, int xr, int yt, int yb) {
 }
 
 void tactiletext (int xl, int xr, int yt, int yb) {
+  strokeWeight (5);
   if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
     fill (blue);
   } else {
@@ -132,5 +138,27 @@ void tactileslider (int xl, int xr, int yt, int yb) {
     fill (blue);
   }
 }
+
+void pingpong () {
+  pingpong.rewind ();
+  pingpong.play ();
+}
+
+void click () {
+  click.rewind ();
+  click.play ();
+}
+
+void randomDirection () {
+  direction=random (0, 10);//chooses random number
+  vx=random (10*cos(a));//generates random x angle+the speed you chose
+  if (direction<5) {//if direction was below 5, the ball moves left
+    vy=random (10*sin(aYminus));
+  } else if (direction>5) {//if direction was above 5, ball moves right-->this stuff prevents up and down bouncing
+    vy=random (10*sin(aYplus));
+  }
+}
+
+
 
 //fix starting speed

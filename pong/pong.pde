@@ -48,6 +48,8 @@ float direction;
 Minim minim;
 AudioPlayer click, point, pingpong, win;//sound variables
 
+PFont font;
+
 void setup () {
   size (1000, 700);
   mode=intro;
@@ -92,6 +94,9 @@ void setup () {
   point=minim.loadFile ("point.mp3");
   win=minim.loadFile ("win.mp3");
   pingpong=minim.loadFile ("pingpong.mp3");
+  
+  font=createFont ("Pix32.ttf", 150);
+  textFont (font);
 }
 
 void draw () {
@@ -111,7 +116,7 @@ void draw () {
 }
 
 void tactilebutton (int xl, int xr, int yt, int yb) {
-  if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb){
+  if (mouseX>xl-5 && mouseX<xr+5 && mouseY>yt-5 && mouseY<yb+5){//+-5 for strokeWeight
     stroke (magenta);
     noFill ();
   } else {
@@ -122,7 +127,7 @@ void tactilebutton (int xl, int xr, int yt, int yb) {
 
 void tactiletext (int xl, int xr, int yt, int yb) {
   strokeWeight (5);
-  if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
+  if (mouseX>xl-5 && mouseX<xr+5 && mouseY>yt-5 && mouseY<yb+5) {
     fill (blue);
   } else {
     fill (magenta);

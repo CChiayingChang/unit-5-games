@@ -1,6 +1,6 @@
 void intro () {
   background (0);
-  textSize (100);
+  textSize (150);
   fill (255);
   text ("PONG!", 500, 350);
   println (mouseX, mouseY);

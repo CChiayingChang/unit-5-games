@@ -23,9 +23,9 @@ void game () {
     if (downKey==true) rightY=rightY+10;
   } else {//one player mode
     if (ballX>width/2) {//if the ball is on the right side
-      if (ballY<rightY) {//if ball is above the paddle, the paddle moves up
+      if (ballY<rightY-rightD/2) {//if ball is above the paddle, the paddle moves up-->+- the diameter to make paddle slower and also to minimize paddle vibration
         rightY=rightY-10;
-      } else if (ballY>rightY) {//if ball is below the paddle, paddle moves down
+      } else if (ballY>rightY+rightD/2) {//if ball is below the paddle, paddle moves down
         rightY=rightY+5;
       }
     }

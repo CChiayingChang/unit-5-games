@@ -1,9 +1,9 @@
 void options () {
   background (0);
   println (mouseX, mouseY);
-  textSize (100);
+  textSize (150);
   fill (255);
-  text ("OPTIONS", 500, 125);
+  text ("OPTIONS", 500, 150);
   strokeWeight (5);
   stroke (255);
   

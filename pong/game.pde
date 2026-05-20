@@ -1,5 +1,12 @@
 void game () {
   background (0);
+  if (speed==1) {
+    howFast=0;
+  } else if (speed==2) {
+    howFast=5;
+  } else if (speed==3) {
+    howFast=10;
+  }
   //paddles
   circle (leftX, leftY, leftD);
   rightD=leftD;
@@ -44,24 +51,36 @@ void game () {
   
   if (dist (leftX, leftY, ballX, ballY)<=ballD/2+leftD/2) {
     //if the distance between the center of the ball and the center of the paddle is equal to or less than the combined radiuses, then changes direction
-    vx=(ballX-leftX)/15;//moves if off at an angle
-    vy=(ballY-leftY)/15;//have to divide the speed otherwise its too fast cause the speed will be equal to the coordinates
+    vx=(ballX-leftX)/15+howFast;//moves if off at an angle
+    pingpong.rewind ();
+    pingpong.play ();
+    vy=(ballY-leftY)/15+howFast;//have to divide the speed otherwise its too fast cause the speed will be equal to the coordinates
   }
   if (dist (rightX, rightY, ballX, ballY)<=ballD/2+rightD/2) {
     //moves it off at an angle
-    vx=-(rightX-ballX)/15;//make the speed negative, otherwise the ball moves right and gets stuck in the paddle
-    vy=-(rightY-ballY)/15;
+    pingpong.rewind ();
+    pingpong.play ();
+    vx=-(rightX-ballX)/15-howFast;//make the speed negative, otherwise the ball moves right and gets stuck in the paddle
+    vy=-(rightY-ballY)/15-howFast;
   }
   
-  if (ballY<=0+ballD/2 || ballY>=height-ballD/2) vy=vy*-1; //if the ball hits the top or bottom wall, it will bounce off
+  if (ballY<=0+ballD/2 || ballY>=height-ballD/2) {
+    vy=vy*-1; //if the ball hits the top or bottom wall, it will bounce off
+    pingpong.rewind ();
+    pingpong.play ();
+  }    
   //scores
   if (ballX<0) {
+    pingpong.rewind ();
+    pingpong.play ();
     rightscore++;//++means plus 1
     ballX=width/2;//brings ball back to center of screen--> also, if you don't add, the score will increase infinitely
     ballY=height/2;
     timer=100;
   }
   if (ballX>width){
+    pingpong.rewind ();
+    pingpong.play ();
     leftscore++;
     ballX=width/2;
     ballY=height/2;
@@ -70,7 +89,7 @@ void game () {
   textSize (50);
   text (leftscore, 250, 75);//left score
   text (rightscore, 750, 75); //right score
-  if (timer>=0) text(timer, 750, 650);
+  if (timer>=0) text(timer, 750, 650);//timer for the ball countdown
   timer=timer-1;
   
   println (mouseX, mouseY);

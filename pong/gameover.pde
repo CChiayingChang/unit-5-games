@@ -19,5 +19,7 @@ void gameover () {
 void gameoverClick () {
   if (mouseX>375 && mouseX<625 && mouseY>500 && mouseY<575) {
     mode=intro;
+    leftscore=0;
+    rightscore=0;
   }
 }

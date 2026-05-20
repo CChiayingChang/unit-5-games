@@ -2,6 +2,7 @@ void options () {
   background (0);
   println (mouseX, mouseY);
   textSize (100);
+  fill (255);
   text ("OPTIONS", 500, 125);
   strokeWeight (5);
   stroke (255);
@@ -35,17 +36,41 @@ void options () {
   textSize (60);
   text ("SPEED", 750, 250);//options for speed of ball
   tactilebutton (585, 685, 285, 385);
-  t
+  if (speed==1) {//if you choose the option, the button will be coloured
+    fill (purple);
+  } else noFill ();
   rect (585, 285, 100, 100);
+  tactiletext (585, 685, 285, 385);
+  text ("1", 635, 350);
+  
   tactilebutton (705, 805, 285, 385);
+  if (speed==2) {
+    fill (purple);
+  } else noFill ();
   rect (705, 285, 100, 100);
+  tactiletext (705, 805, 285, 385);
+  text ("2", 755, 350);
+  
   tactilebutton (825, 925, 285, 385);
+  if (speed==3) {
+    fill (purple);
+  } else noFill ();
   rect (825, 285, 100, 100);
+  tactiletext (825, 925, 285, 385);
+  text ("3", 875, 350);
 }
 
 void optionsClick () {
   if (mouseX>795 && mouseX<955 && mouseY>590 && mouseY<665) {
     mode=game;
+  }
+  
+  if (mouseX>585 && mouseX<685 && mouseY>285 && mouseY<385) {
+    speed=1;
+  } else if (mouseX>705 && mouseX<805 && mouseY>285 && mouseY<385) {
+    speed=2;
+  } else if (mouseX>825 && mouseX<925 && mouseY>285 && mouseY<385) {
+    speed=3;
   }
 }
 

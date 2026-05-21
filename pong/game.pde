@@ -10,9 +10,10 @@ void game () {
   //paddles
   fill (255);
   noStroke ();
-  circle (leftX, leftY, leftD);
+  imageMode (CENTER);
+  image (ball, leftX, leftY, leftD, leftD);//left paddle
   rightD=leftD;
-  circle (rightX, rightY, rightD);//update-->for now, rightD is equal to leftD
+  image (ball, rightX, rightY, rightD, rightD);//update-->for now, rightD is equal to leftD
   
   //move paddles
   //if (leftY>0+leftD/2 && leftY<height-leftD/2) {//don't use this, it will get stuck
@@ -37,12 +38,14 @@ void game () {
   if (rightY<0+rightD/2) rightY=0+rightD/2;
   if (rightY>height-rightD/2) rightY=height-rightD/2;
   
+  //divider
   stroke (255);
   strokeWeight (5);
+  fill (blue);
   line (500, 0, 500, 700);
   
   //ball
-  circle (ballX, ballY, ballD);
+  image (ball, ballX, ballY, ballD, ballD);
   
   //movements
   if (timer<0) {//the ball will only move once the countdown stops
@@ -75,16 +78,18 @@ void game () {
   }    
   
   //scores
-  if (ballX<0) {
-    pingpong ();
+  if (ballX<0) {//if right scores
+    point.rewind ();
+    point.play ();
     rightscore++;//++means plus 1
     ballX=width/2;//brings ball back to center of screen--> also, if you don't add, the score will increase infinitely
     ballY=height/2;
     timer=100;
     randomDirection ();
   }
-  if (ballX>width){
-    pingpong ();
+  if (ballX>width){//if left scores
+    point.rewind ();
+    point.play ();
     leftscore++;
     ballX=width/2;
     ballY=height/2;
@@ -104,9 +109,12 @@ void game () {
   }
   
   //pause button
-  tactilebutton (900, 950, 600, 650);
+  imageMode (CORNER);
+  tactilebutton (900, 950, 600, 650, 900, 600, 50, 50);
   fill (0);
-  rect (900, 600, 50, 50);
+  if (mouseX>900 && mouseX<950 && mouseY>600 && mouseY<650) {
+    stroke (magenta);
+  } else stroke (blue);
   line (917, 614, 917, 636);
   line (933, 614, 933, 636);
 }

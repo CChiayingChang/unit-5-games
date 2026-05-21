@@ -12,20 +12,17 @@ void pause () {
   //resume button
   noFill ();
   textSize (50);
-  tactilebutton (150, 350, 430, 505);
-  rect (150, 430, 200, 75);
+  tactilebutton (150, 350, 430, 505, 150, 430, 200, 75);
   tactiletext (150, 350, 430, 505);
   text ("RESUME", 250, 485);
   
   //restart button
-  tactilebutton (400, 600, 430, 505);
-  rect (400, 430, 200, 75);
+  tactilebutton (400, 600, 430, 505, 400, 430, 200, 75);
   tactiletext (400, 600, 430, 505);
   text ("RESTART", 500, 485);
   
   //menu button
-  tactilebutton (650, 850, 430, 505);
-  rect (650, 430, 200, 75);
+  tactilebutton (650, 850, 430, 505, 650, 430, 200, 75);
   tactiletext (650, 850, 430, 505);
   text ("MENU", 750, 485);
 }
@@ -43,6 +40,7 @@ void pauseClick () {
     mode=game;
     randomDirection ();
     timer=100;
+    click ();
   }
   if (mouseX>650 && mouseX<850 && mouseY>430 && mouseY<505) {//if you click on menu
     leftscore=0;
@@ -51,6 +49,7 @@ void pauseClick () {
     ballY=height/2;
     randomDirection ();
     mode=intro;
+    click ();
   }
 }
 

@@ -5,14 +5,12 @@ void intro () {
   text ("PONG!", 500, 350);
   println (mouseX, mouseY);
   //1 player button
-  tactilebutton (190, 440, 460, 535);
-  rect (190, 460, 250, 75);
+  tactilebutton (190, 440, 460, 535, 190, 460, 250, 75);
   tactiletext (190, 440, 460, 535);
   textSize (50);
   text ("1 player", 315, 510);
   //2 player button
-  tactilebutton (560, 810, 460, 535);
-  rect (560, 460, 250, 75);
+  tactilebutton (560, 810, 460, 535, 560, 460, 250, 75);
   tactiletext (560, 810, 460, 535);
   text ("2 players", 685, 510);
   
@@ -33,3 +31,5 @@ void introClick () {
     click ();
   }
 }
+
+//add theme

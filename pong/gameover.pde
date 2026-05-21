@@ -1,6 +1,7 @@
 void gameover () {
   background (0);
-  textSize (100);
+  textSize (150);
+  fill (255);
   if (leftscore>rightscore) {
     text ("LEFT WIN", width/2, height/2);
   } else if (rightscore>leftscore) {
@@ -8,8 +9,7 @@ void gameover () {
   }
   
   textSize (50);
-  tactilebutton (375, 625, 500, 575);
-  rect (375, 500, 250, 75);
+  tactilebutton (375, 625, 500, 575, 375, 500, 250, 75);
   tactiletext (375, 625, 500, 575);
   text ("RESTART", 500, 550);
   

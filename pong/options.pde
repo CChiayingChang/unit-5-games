@@ -13,7 +13,8 @@ void options () {
   circle (100, sliderY, 25);
   noStroke ();
   fill (255);
-  arc (165, 397, leftD, leftD, PI+HALF_PI, TWO_PI+HALF_PI);
+  imageMode (CENTER);
+  image (paddle, leftD/4+140, 397, leftD/2, leftD);
   leftD=map (sliderY, 575, 220, 100, 300);
   
   //slider for ball size
@@ -22,12 +23,12 @@ void options () {
   circle (380, sliderY2, 25);
   noStroke ();
   fill (255);
-  circle (460, 397, ballD);//ball
+  image (ball, 460, 397, ballD, ballD);//ball
+  imageMode (CORNER);
   ballD=map (sliderY2, 575, 220, 10, 100);
   
   //start button
-  tactilebutton (795, 955, 590, 665);
-  rect (795, 590, 160, 75);
+  tactilebutton (795, 955, 590, 665, 795, 590, 160, 75);
   tactiletext (795, 955, 590, 665);
   textSize (50);
   text ("START", 875, 642);
@@ -35,27 +36,21 @@ void options () {
   
   textSize (60);
   text ("SPEED", 750, 250);//options for speed of ball
-  tactilebutton (585, 685, 285, 385);
-  if (speed==1) {//if you choose the option, the button will be coloured
-    fill (purple);
-  } else noFill ();
-  rect (585, 285, 100, 100);
+  speed (1);
+  rect (585, 285, 100, 100, 25);//round corners so the fill doesn't show past borders
+  tactilebutton (585, 685, 285, 385, 585, 285, 100, 100);
   tactiletext (585, 685, 285, 385);
   text ("1", 635, 350);
   
-  tactilebutton (705, 805, 285, 385);
-  if (speed==2) {
-    fill (purple);
-  } else noFill ();
-  rect (705, 285, 100, 100);
+  speed (2);//will change the button fil to purple if pressed
+  rect (705, 285, 100, 100, 25);
+  tactilebutton (705, 805, 285, 385, 705, 285, 100, 100);
   tactiletext (705, 805, 285, 385);
   text ("2", 755, 350);
   
-  tactilebutton (825, 925, 285, 385);
-  if (speed==3) {
-    fill (purple);
-  } else noFill ();
-  rect (825, 285, 100, 100);
+  speed (3);
+  rect (825, 285, 100, 100, 25);
+  tactilebutton (825, 925, 285, 385, 825, 285, 100, 100);
   tactiletext (825, 925, 285, 385);
   text ("3", 875, 350);
 }

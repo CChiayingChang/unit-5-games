@@ -49,6 +49,10 @@ Minim minim;
 AudioPlayer click, point, pingpong, win;//sound variables
 
 PFont font;
+PImage pinkbox;//the boxes for the buttons
+PImage bluebox;
+PImage ball;
+PImage paddle;//for the option screen
 
 void setup () {
   size (1000, 700);
@@ -97,6 +101,10 @@ void setup () {
   
   font=createFont ("Pix32.ttf", 150);
   textFont (font);
+  pinkbox=loadImage ("pinkbox.PNG");
+  bluebox=loadImage ("bluebox.PNG");
+  ball=loadImage ("ball.PNG");
+  paddle=loadImage ("paddle.PNG");
 }
 
 void draw () {
@@ -115,13 +123,12 @@ void draw () {
   }
 }
 
-void tactilebutton (int xl, int xr, int yt, int yb) {
+void tactilebutton (int xl, int xr, int yt, int yb, int x, int y, int w, int h) {
+  noFill ();
   if (mouseX>xl-5 && mouseX<xr+5 && mouseY>yt-5 && mouseY<yb+5){//+-5 for strokeWeight
-    stroke (magenta);
-    noFill ();
+    image (pinkbox, x, y, w, h);
   } else {
-    stroke (blue);
-    noFill ();
+    image (bluebox, x, y, w, h);
   }
 }
 
@@ -162,6 +169,12 @@ void randomDirection () {
   } else if (direction>5) {//if direction was above 5, ball moves right-->this stuff prevents up and down bouncing
     vy=random (10*sin(aYplus));
   }
+}
+
+void speed (int s) {//wil change the fill of speed option buttons depending on hwat you chhoose
+  if (speed==s) {//if you choose the option, the button will be coloured
+    fill (purple);
+  } else fill (0);
 }
 
 

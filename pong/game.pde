@@ -47,7 +47,7 @@ void game () {
   //ball
   image (ball, ballX, ballY, ballD, ballD);
   
-  //movements
+  //movements (ball)
   if (timer<0) {//the ball will only move once the countdown stops
     ballX=ballX+vx;//ball moves
     ballY=ballY+vy;//if you add howFast here, for some reason, the ball will not bounce off the walls

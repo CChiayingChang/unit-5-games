@@ -26,10 +26,10 @@ float ballX, ballY, ballD; //ball
 boolean wKey, sKey, upKey, downKey;//use booleans for the keys so that theres no key repeat delay
 
 //movement variables
-float a= random (0, TWO_PI);//generates random angle
 //have 2 Y angle ranges-->one for left, one for right, so it can't generate any vertical moving balls (cause then it gets stuck bouncing up and down)
-float aYminus = random (HALF_PI+QUARTER_PI, PI+QUARTER_PI);
-float aYplus=random (TWO_PI+QUARTER_PI);
+//float aYminus = random (HALF_PI+QUARTER_PI, PI+QUARTER_PI);
+//float aYplus=random (PI+HALF_PI+QUARTER_PI, TWO_PI+QUARTER_PI);
+float a=random(0, TWO_PI);
 float vx;
 float vy;
 
@@ -42,7 +42,6 @@ boolean onePlayer;
 
 int speed;//variabl changes depending on what speed option you choose
 int howFast; //the amount you add to speed depending on what speed option you chose
-float direction;
 
 //sound
 Minim minim;
@@ -56,7 +55,7 @@ PImage paddle;//for the option screen
 
 void setup () {
   size (1000, 700);
-  mode=intro;
+  mode=options;
   textAlign (CENTER);
   strokeWeight (3);
   
@@ -78,7 +77,8 @@ void setup () {
   wKey=sKey=upKey=downKey=false;
   
   //movement
-  randomDirection ();
+  vx=10*cos(a);
+  vy=10*sin(a);
   
   
   textAlign (CENTER);
@@ -162,12 +162,15 @@ void click () {
 }
 
 void randomDirection () {
-  direction=random (0, 10);//chooses random number
-  vx=random (10*cos(a));//generates random x angle+the speed you chose
-  if (direction<5) {//if direction was below 5, the ball moves left
-    vy=random (10*sin(aYminus));
-  } else if (direction>5) {//if direction was above 5, ball moves right-->this stuff prevents up and down bouncing
-    vy=random (10*sin(aYplus));
+  if (speed==1) {
+    vx=8*cos(a);
+    vy=8*sin(a);
+  } else if (speed==2) {
+    vx=15*cos(a);
+    vy=15*sin(a);
+  } else if (speed==3) {
+    vx=20*cos(a);
+    vy=20*sin(a);
   }
 }
 

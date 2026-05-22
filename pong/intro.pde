@@ -1,5 +1,7 @@
 void intro () {
+  backgroundMusic.play ();
   background (0);
+  outline ();
   textSize (150);
   fill (255);
   text ("PONG!", 500, 350);
@@ -31,5 +33,3 @@ void introClick () {
     click ();
   }
 }
-
-//add theme

@@ -1,5 +1,6 @@
 void game () {
   background (0);
+  outline ();
   if (speed==1) {
     howFast=0;
   } else if (speed==2) {
@@ -39,9 +40,8 @@ void game () {
   if (rightY>height-rightD/2) rightY=height-rightD/2;
   
   //divider
-  stroke (255);
+  stroke (magenta);
   strokeWeight (5);
-  fill (blue);
   line (500, 0, 500, 700);
   
   //ball
@@ -97,6 +97,7 @@ void game () {
     randomDirection ();
   }
   textSize (50);
+  fill (blue);
   text (leftscore, 250, 75);//left score
   text (rightscore, 750, 75); //right score
   if (timer>=0) text(timer, 750, 650);//timer for the ball countdown
@@ -128,9 +129,3 @@ void gameClick () {
     click ();
   }
 }
-
-//ball might get stuck between walland paddle--fix
-//fix ball movemen-->sometimes gets stuck bouncing up and down
-//one player mode--> the right paddle vibrates
-//fix ball inital speed
-//fix start angle-->sometimes gets stuck bouncing up and down, boring

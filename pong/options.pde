@@ -1,5 +1,6 @@
 void options () {
   background (0);
+  outline ();
   println (mouseX, mouseY);
   textSize (150);
   fill (255);
@@ -35,24 +36,24 @@ void options () {
   fill (255);
   
   textSize (60);
-  text ("SPEED", 750, 250);//options for speed of ball
+  text ("SPEED", 750, 250+100);//options for speed of ball
   speed (1);
-  rect (585, 285, 100, 100, 25);//round corners so the fill doesn't show past borders
-  tactilebutton (585, 685, 285, 385, 585, 285, 100, 100);
-  tactiletext (585, 685, 285, 385);
-  text ("1", 635, 350);
+  rect (585, 285+100, 100, 100, 25);//round corners so the fill doesn't show past borders
+  tactilebutton (585, 685, 285+100, 385+100, 585, 285+100, 100, 100);
+  tactiletext (585, 685, 285+100, 385+100);
+  text ("1", 635, 350+100);
   
   speed (2);//will change the button fil to purple if pressed
-  rect (705, 285, 100, 100, 25);
-  tactilebutton (705, 805, 285, 385, 705, 285, 100, 100);
-  tactiletext (705, 805, 285, 385);
-  text ("2", 755, 350);
+  rect (705, 285+100, 100, 100, 25);
+  tactilebutton (705, 805, 285+100, 385+100, 705, 285+100, 100, 100);
+  tactiletext (705, 805, 285+100, 385+100);
+  text ("2", 755, 350+100);
   
   speed (3);
-  rect (825, 285, 100, 100, 25);
-  tactilebutton (825, 925, 285, 385, 825, 285, 100, 100);
-  tactiletext (825, 925, 285, 385);
-  text ("3", 875, 350);
+  rect (825, 285+100, 100, 100, 25);
+  tactilebutton (825, 925, 285+100, 385+100, 825, 285+100, 100, 100);
+  tactiletext (825, 925, 285+100, 385+100);
+  text ("3", 875, 350+100);
 }
 
 void optionsClick () {
@@ -63,13 +64,13 @@ void optionsClick () {
   }
   
   //speed buttons
-  if (mouseX>585 && mouseX<685 && mouseY>285 && mouseY<385) {
+  if (mouseX>585 && mouseX<685 && mouseY>285+100 && mouseY<385+100) {
     speed=1;
     click ();
-  } else if (mouseX>705 && mouseX<805 && mouseY>285 && mouseY<385) {
+  } else if (mouseX>705 && mouseX<805 && mouseY>285+100 && mouseY<385+100) {
     speed=2;
     click ();
-  } else if (mouseX>825 && mouseX<925 && mouseY>285 && mouseY<385) {
+  } else if (mouseX>825 && mouseX<925 && mouseY>285+100 && mouseY<385+100) {
     speed=3;
     click ();
   }
@@ -78,19 +79,12 @@ void optionsClick () {
 void slider () {
   if (dist(mouseX, mouseY, 100, sliderY) <13 && mode==options && mouseY>220 && mouseY<575) {
     sliderY=mouseY;
-    click ();
   }
   if (dist (mouseX, mouseY, 380, sliderY2) <13 && mode==options && mouseY>220 && mouseY<575) {
     sliderY2=mouseY;
-    click ();
   }
 }
 
 void mouseDragged () {
   slider ();
 }
-//add difficulty level for speed of ball
-//add difficulty level for how many balls
-//paddle size
-//ball size
-//different choicces for ball?

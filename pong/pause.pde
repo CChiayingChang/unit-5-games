@@ -1,4 +1,5 @@
 void pause () {
+  outline ();
   println (mouseX, mouseY);
   fill (255);
   textSize (150);
@@ -52,5 +53,3 @@ void pauseClick () {
     click ();
   }
 }
-
-//add restart. back to menu, resume

@@ -45,7 +45,7 @@ int howFast; //the amount you add to speed depending on what speed option you ch
 
 //sound
 Minim minim;
-AudioPlayer click, point, pingpong, win;//sound variables
+AudioPlayer click, point, pingpong, win, backgroundMusic;//sound variables
 
 PFont font;
 PImage pinkbox;//the boxes for the buttons
@@ -55,7 +55,7 @@ PImage paddle;//for the option screen
 
 void setup () {
   size (1000, 700);
-  mode=options;
+  mode=intro;
   textAlign (CENTER);
   strokeWeight (3);
   
@@ -98,6 +98,7 @@ void setup () {
   point=minim.loadFile ("point.mp3");
   win=minim.loadFile ("win.mp3");
   pingpong=minim.loadFile ("pingpong.mp3");
+  backgroundMusic=minim.loadFile ("backgroundMusic.mp3");
   
   font=createFont ("Pix32.ttf", 150);
   textFont (font);
@@ -172,6 +173,7 @@ void randomDirection () {
     vx=20*cos(a);
     vy=20*sin(a);
   }
+  a=random(0, TWO_PI);
 }
 
 void speed (int s) {//wil change the fill of speed option buttons depending on hwat you chhoose
@@ -180,6 +182,9 @@ void speed (int s) {//wil change the fill of speed option buttons depending on h
   } else fill (0);
 }
 
-
-
-//fix starting speed
+void outline () {
+  noFill ();
+  strokeWeight (15);
+  stroke (magenta);
+  rect (0, 0, width, height);
+}

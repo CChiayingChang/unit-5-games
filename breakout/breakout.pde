@@ -1,5 +1,9 @@
 //breakout
 
+//colour palette
+color red=#E00000;
+color yellow=#E0C600;
+
 //mode framework
 int mode;
 final int intro=1;
@@ -19,8 +23,13 @@ float paddleX;
 float paddleD;
 float paddleY;
 
+//brick variables (array)
+int [] x;//declaration-->allows you to declare x and y coordinates of all the bricks at once, instead of one at a time
+int [] y;
+int brickNumber;//for how many bricks there are
+
 void setup () {
-  mode=intro;
+  mode=game;
   size (800, 800);
   paddleX=400;
   paddleD=100;
@@ -31,6 +40,23 @@ void setup () {
   ballD=15;
   paddleY=800;
   textAlign (CENTER);
+  
+  //setup array of bricks
+  brickNumber=4;
+  x=new int [brickNumber];//like an empty bok of xeroes, there are 3 pages
+  y=new int [brickNumber];//instantiation
+  
+  x[0]=100;//kind of like first page of book, x coordinates of 1st brick is 100
+  y[0]=100;//y coordinate of 1st brick is 100
+  
+  x[1]=300;//x coordinates of 2nd brick is 200
+  y[1]=100;//y coordinates of 2nd brick is 100;
+  
+  x[2]=500;
+  y[2]=100;
+  
+  x[3]=700;
+  y[3]=100;
 }
 
 void draw () {
@@ -44,5 +70,21 @@ void draw () {
     pause ();
   } else if (mode==gameover) {
     gameover ();
+  }
+}
+
+void tactileButton (int xl, int xr, int yt, int yb) {
+  noFill ();
+  strokeWeight (3);
+  if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
+    stroke (yellow);
+  } else stroke (red);
+}
+
+void tactileText (int xl, int xr, int yt, int yb) {
+  if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
+    fill (red);
+  } else {
+    fill (yellow);
   }
 }

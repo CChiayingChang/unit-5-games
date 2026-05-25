@@ -2,7 +2,11 @@
 
 //colour palette
 color red=#E00000;
+color orange=#FF8503;
 color yellow=#E0C600;
+color green=#07D85C;
+color blue=#0AAEED;
+color purple=#A34FED;
 
 //mode framework
 int mode;
@@ -19,14 +23,14 @@ boolean rightKey, leftKey;
 float ballX, ballY, vx, vy, ballD;
 
 //paddle
-float paddleX;
-float paddleD;
-float paddleY;
+float paddleX, paddleD, paddleY;
 
 //brick variables (array)
 int [] x;//declaration-->allows you to declare x and y coordinates of all the bricks at once, instead of one at a time
 int [] y;
 int brickNumber;//for how many bricks there are
+int tempx, tempy;//stores value of first brick
+boolean [] hit; //keeps track if a brick has been hit or not
 
 void setup () {
   mode=game;
@@ -42,21 +46,23 @@ void setup () {
   textAlign (CENTER);
   
   //setup array of bricks
-  brickNumber=4;
+  brickNumber=90;//how many bricks there are
   x=new int [brickNumber];//like an empty bok of xeroes, there are 3 pages
   y=new int [brickNumber];//instantiation
+  hit= new boolean [brickNumber];
   
-  x[0]=100;//kind of like first page of book, x coordinates of 1st brick is 100
-  y[0]=100;//y coordinate of 1st brick is 100
-  
-  x[1]=300;//x coordinates of 2nd brick is 200
-  y[1]=100;//y coordinates of 2nd brick is 100;
-  
-  x[2]=500;
-  y[2]=100;
-  
-  x[3]=700;
-  y[3]=100;
+  tempx=50;
+  tempy=75;
+  for (int i=0; i<=brickNumber-1; i=i+1) {
+    x[i]=tempx;//the coordinates of the first brick is equal to the coordinates of tempx and tempy
+    y[i]=tempy;
+    hit [i]=false;//the balls hhave not been hit yet
+    tempx=tempx+50;//so the bricks change coordinates
+    if (tempx==width) {//if the row exceeds the width, start the next row
+      tempy=tempy+50;
+      tempx=50;
+    }
+  }
 }
 
 void draw () {

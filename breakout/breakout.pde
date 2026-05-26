@@ -32,6 +32,9 @@ int brickNumber;//for how many bricks there are
 int tempx, tempy;//stores value of first brick
 boolean [] hit; //keeps track if a brick has been hit or not
 
+int points;
+int lives;
+
 void setup () {
   mode=game;
   size (800, 800);
@@ -63,6 +66,10 @@ void setup () {
       tempx=50;
     }
   }
+  
+  points=0;
+  lives=5;
+  textAlign (CENTER);
 }
 
 void draw () {
@@ -90,7 +97,9 @@ void tactileButton (int xl, int xr, int yt, int yb) {
 void tactileText (int xl, int xr, int yt, int yb) {
   if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
     fill (red);
+    stroke (red);
   } else {
+    stroke (yellow);
     fill (yellow);
   }
 }

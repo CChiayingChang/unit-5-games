@@ -16,5 +16,5 @@ void intro () {
 }
 
 void introClick () {
-
+  if (mouseX>300 && mouseX<500 && mouseY>500 && mouseY<575) mode=game;
 }

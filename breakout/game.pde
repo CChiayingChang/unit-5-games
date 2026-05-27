@@ -38,6 +38,7 @@ void game () {
     vy=10;
     vx=0;
     lives=lives-1;
+    ballX=400;
   }
   
   if (points==90) mode=gameover;
@@ -58,7 +59,12 @@ void game () {
 }
 
 void gameClick () {
-  if (mouseX>725 && mouseX<775 && mouseX>725 && mouseX<775) mode=pause;
+  if (mouseX>725 && mouseX<775 && mouseX>725 && mouseX<775) {
+    fill (0, 100);
+    noStroke ();
+    rect (0, 0, width, height);
+    mode=pause;
+  }
 }
 
 void brickStuff (int i) {
@@ -69,7 +75,8 @@ void brickStuff (int i) {
     if (y[i]==275) fill (blue);
     if (y[i]==325) fill (purple);
     circle (x[i], y[i], 25);
-    if (dist(ballX, ballY, x[i], y[i])<ballD/2+12) {//if the ball hits the paddle
+    //if the ball hits the bricks
+    if (dist(ballX, ballY, x[i], y[i])<ballD/2+12) {
       vy=(ballY-y[i])/3;
       vx=(ballX-x[i])/3;
       hit [i]=true;

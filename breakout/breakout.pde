@@ -36,7 +36,7 @@ int points;
 int lives;
 
 void setup () {
-  mode=game;
+  mode=gameover;
   size (800, 800);
   paddleX=400;
   paddleD=100;
@@ -75,8 +75,6 @@ void setup () {
 void draw () {
   if (mode==intro) {
     intro ();
-  } else if (mode==options) {
-    options ();
   } else if (mode==game) {
     game ();
   } else if (mode==pause) {

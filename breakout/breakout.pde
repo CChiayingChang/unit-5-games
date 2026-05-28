@@ -35,8 +35,17 @@ boolean [] hit; //keeps track if a brick has been hit or not
 int points;
 int lives;
 
+//gifs
+PImage [] winGif;//the array for the winning gif
+int fNumWIN;//how many frames there are in the win gif
+int whichFwin;//which frame is playing for the win gif
+
+PImage [] loseGif;//the array for the losing gif
+int fNumLOSE;//how many frames there are in the lose gif
+int whichFlose;//which frame is playing for the lose gif
+
 void setup () {
-  mode=gameover;
+  mode=intro;
   size (800, 800);
   paddleX=400;
   paddleD=100;
@@ -101,3 +110,5 @@ void tactileText (int xl, int xr, int yt, int yb) {
     fill (yellow);
   }
 }
+
+//to do: sound effects, design, add gif, different pattern of bricks?

@@ -26,11 +26,23 @@ void game () {
   //if it hits the walls
   if (ballX<ballD/2 || ballX>width-ballD/2) vx=-vx;
   if (ballY<ballD/2) vy=-vy;
+  
+  
   //if it hits the paddle
-  if (dist(paddleX, paddleY, ballX, ballY)<=paddleD/2+ballD/2) {
-    vy=(ballX-paddleX)/5;
-    vx=(ballY-paddleY)/5;
+  if (points<5) {
+    if (dist(paddleX, paddleY, ballX, ballY)<=paddleD/2+ballD/2) {
+      vy=(ballX-paddleX)/4;
+      vx=(ballY-paddleY)/4;
+    }
   }
+  else if (points>5) {
+    if (dist(paddleX, paddleY, ballX, ballY)<=paddleD/2+ballD/2) {
+      vy=(ballX-paddleX)/4;
+      vx=(ballY-paddleY)/4;
+    }
+  }
+    
+    
   //if it falls off screen
   if (ballY>height-ballD/2) {
     //resets the ball position and direction
@@ -56,6 +68,7 @@ void game () {
   tactileText (725, 775, 725, 775);
   line (740, 740, 740, 760);
   line (760, 740, 760, 760);
+ 
 }
 
 void gameClick () {
@@ -83,7 +96,7 @@ void brickStuff (int i) {
       points=points+1;//gain a point if you hit a ball
     }
 }
-//scoring, win condition, lives, loseing, display score and number of points
+
 //make faster as your streak gets higher?
 //twice as many points if you get streak above 10?
 

@@ -34,6 +34,7 @@ void pauseClick () {
   if (mouseX>150 && mouseX<350 && mouseY>475 && mouseY<535) {
     restart ();
     mode=game;
+    paddleX=width/2;
   }
   
   //if you click on menu

@@ -2,11 +2,11 @@ void game () {
   background (0);
   outline ();
   if (speed==1) {
-    howFast=0;
+    howFast=15;
   } else if (speed==2) {
-    howFast=5;
-  } else if (speed==3) {
     howFast=10;
+  } else if (speed==3) {
+    howFast=5;
   }
   //paddles
   fill (255);
@@ -25,10 +25,10 @@ void game () {
     if (downKey==true) rightY=rightY+10;
   } else {//one player mode
     if (ballX>width/2) {//if the ball is on the right side
-      if (ballY<rightY-rightD/2) {//if ball is above the paddle, the paddle moves up-->+- the diameter to make paddle slower and also to minimize paddle vibration
+      if (ballY<rightY) {//if ball is above the paddle, the paddle moves up-->+- the diameter to make paddle slower and also to minimize paddle vibration
         rightY=rightY-10;
-      } else if (ballY>rightY+rightD/2) {//if ball is below the paddle, paddle moves down
-        rightY=rightY+5;
+      } else if (ballY>rightY) {//if ball is below the paddle, paddle moves down
+        rightY=rightY+10;
       }
     }
   }
@@ -56,18 +56,18 @@ void game () {
   //hits left paddle
   if (dist (leftX, leftY, ballX, ballY)<=ballD/2+leftD/2) {
     //if the distance between the center of the ball and the center of the paddle is equal to or less than the combined radiuses, then changes direction
-    vx=(ballX-leftX)/15+howFast;//moves if off at an angle
+    vx=(ballX-leftX)/(howFast);//moves if off at an angle
     pingpong.rewind ();
     pingpong.play ();
-    vy=(ballY-leftY)/15+howFast;//have to divide the speed otherwise its too fast cause the speed will be equal to the coordinates
+    vy=(ballY-leftY)/(howFast);//have to divide the speed otherwise its too fast cause the speed will be equal to the coordinates
   }
   //hits right paddle
   if (dist (rightX, rightY, ballX, ballY)<=ballD/2+rightD/2) {
     //moves it off at an angle
     pingpong.rewind ();
     pingpong.play ();
-    vx=-(rightX-ballX)/15-howFast;//make the speed negative, otherwise the ball moves right and gets stuck in the paddle
-    vy=-(rightY-ballY)/15-howFast;
+    vx=-(rightX-ballX)/(howFast);//make the speed negative, otherwise the ball moves right and gets stuck in the paddle
+    vy=-(rightY-ballY)/(howFast);
   }
   
   //if ball hits top or bottom wall

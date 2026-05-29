@@ -34,6 +34,7 @@ void draw () {
   textSize (30);
   text ("LIVES:" + lives, 450, 100);
   
+  rectMode (CORNER);
   rect (0, groundHeight, width, 50);//ground
   circle (ballX, ballY, ballD);
   
@@ -53,9 +54,9 @@ void draw () {
   //jumping
   if (up==true) jumpTimer=jumpTimer+1;
   if (jumpTimer>0 && jumpTimer<=10) {
-    ballY=ballY-10;
+    ballY=ballY-15;
   } else if (jumpTimer>10 && jumpTimer<20) {
-    ballY=ballY+10;
+    ballY=ballY+15;
   } else if (jumpTimer==20) {
     ballY=groundHeight-ballD/2;
     jumpTimer=0;
@@ -63,7 +64,7 @@ void draw () {
   }
   //----------------------------------------------------------------
   
-  obstacle (400, groundHeight-50, 50, 50);
+  obstacle (400, groundHeight-25, 50, 50);
 }
 
 void keyPressed () {
@@ -79,18 +80,10 @@ void keyReleased () {
 
 
 void obstacle (int x, int y, int w, int h) {
+  rectMode (CENTER);
   rect (x, y, w, h);
-  if (ballX+ballD/2>x && ballX<x && ballY>groundHeight-ballD/2-h) {
+  if (dist(ballX, ballY, x, y)<ballD/2+w/2) {
     lives=lives-1;
-    ballX=x-ballD/2-10;
+    ballX=100;
   }
-  if (ballX-ballD/2<x+w && ballX>x+w && ballY>groundHeight-ballD/2-h) {
-    ballX=x+ballD/2+10+w;
-  }
-  
-  
-  
-  //|| (ballX<x+w+ballD/2 && ballX>x+w)) {
-  //  lives=lives-1;
-  //}
 }

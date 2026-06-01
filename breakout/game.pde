@@ -1,3 +1,5 @@
+
+
 void game () {
   background (0);
   noStroke ();
@@ -24,22 +26,21 @@ void game () {
   ballY=ballY+vy;
   
   //if it hits the walls
-  if (ballX<ballD/2 || ballX>width-ballD/2) vx=-vx;
-  if (ballY<ballD/2) vy=-vy;
+  if (ballX<ballD/2 || ballX>width-ballD/2) {
+    vx=-vx;
+    collide ();//colldie audio
+  }
+  if (ballY<ballD/2) {
+    vy=-vy;
+    collide ();
+  }
   
   
   //if it hits the paddle
-  if (points<5) {
-    if (dist(paddleX, paddleY, ballX, ballY)<=paddleD/2+ballD/2) {
-      vy=(ballX-paddleX)/4;
-      vx=(ballY-paddleY)/4;
-    }
-  }
-  else if (points>5) {
-    if (dist(paddleX, paddleY, ballX, ballY)<=paddleD/2+ballD/2) {
-      vy=(ballX-paddleX)/4;
-      vx=(ballY-paddleY)/4;
-    }
+  if (dist(paddleX, paddleY, ballX, ballY)<paddleD/2+ballD/2) {
+    vy=(ballX-paddleX)/4;
+    vx=(ballY-paddleY)/4;
+    collide ();
   }
     
     
@@ -51,6 +52,8 @@ void game () {
     vx=0;
     lives=lives-1;
     ballX=400;
+    loselife.rewind ();
+    loselife.play ();
   }
   
   if (points==90) mode=gameover;
@@ -72,11 +75,12 @@ void game () {
 }
 
 void gameClick () {
-  if (mouseX>725 && mouseX<775 && mouseX>725 && mouseX<775) {
+  if (mouseX>725 && mouseX<775 && mouseX>725 && mouseX<775) {//if you click on the pause button
     fill (0, 100);
     noStroke ();
     rect (0, 0, width, height);
     mode=pause;
+    click ();
   }
 }
 
@@ -94,6 +98,8 @@ void brickStuff (int i) {
       vx=(ballX-x[i])/3;
       hit [i]=true;
       points=points+1;//gain a point if you hit a ball
+      point.rewind ();
+      point.play ();
     }
 }
 
@@ -101,3 +107,5 @@ void brickStuff (int i) {
 //twice as many points if you get streak above 10?
 
 //vx, vy, boucning, collision, array on quiz, if statements
+
+//figure out how to stop ball from bouncing back and forth horizontally

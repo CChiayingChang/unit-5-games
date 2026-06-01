@@ -1,3 +1,10 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
 //breakout
 
 //colour palette
@@ -44,8 +51,27 @@ PImage [] loseGif;//the array for the losing gif
 int fNumLOSE;//how many frames there are in the lose gif
 int whichFlose;//which frame is playing for the lose gif
 
+Minim minim;
+AudioPlayer click, point, loselife, win, lose, background, collide;
+
 void setup () {
-  mode=intro;
+  //gif win
+  fNumWIN=30;
+  winGif=new PImage [fNumWIN];
+  for (int i=0; i<=fNumWIN-1; i+=1) {
+    winGif [i]=loadImage ("frame_"+i+"_delay-0.07s.gif");
+  }
+  whichFwin=0;
+  
+  //gif lose
+  fNumLOSE=48;
+  loseGif=new PImage [fNumLOSE];
+  for (int i=0; i<=fNumLOSE-1; i+=1) {
+    loseGif [i]=loadImage ("thumbsdown/frame_"+i+"_delay-0.04s.gif");
+  }
+  whichFlose=0;
+  
+  mode=gameover;
   size (800, 800);
   paddleX=400;
   paddleD=100;
@@ -79,6 +105,15 @@ void setup () {
   points=0;
   lives=5;
   textAlign (CENTER);
+  
+  minim= new Minim (this);
+  click=minim.loadFile ("click.mp3");
+  collide=minim.loadFile ("hit.mp3");
+  point=minim.loadFile ("points.mp3");
+  loselife=minim.loadFile ("loselife.mp3");
+  win=minim.loadFile ("win.mp3");
+  lose=minim.loadFile ("lose.mp3");
+  //background=loadFile ("");
 }
 
 void draw () {
@@ -111,4 +146,14 @@ void tactileText (int xl, int xr, int yt, int yb) {
   }
 }
 
-//to do: sound effects, design, add gif, different pattern of bricks?
+void click () {
+  click.rewind ();
+  click.play ();
+}
+
+void collide () {
+  collide.rewind ();
+  collide.play ();
+}
+
+//to do:design, intro music

@@ -28,19 +28,24 @@ void pause () {
 }
 
 void pauseClick () {
-  if (mouseX>725 && mouseX<775 && mouseX>725 && mouseX<775) mode=game; //play button
+  if (mouseX>725 && mouseX<775 && mouseX>725 && mouseX<775) {
+    mode=game; //play button
+    click ();
+  }
   
   //if you click restart
   if (mouseX>150 && mouseX<350 && mouseY>475 && mouseY<535) {
     restart ();
     mode=game;
     paddleX=width/2;
+    click ();
   }
   
   //if you click on menu
   if (mouseX>450 && mouseX<650 && mouseY>475 && mouseY<535) {
     restart ();
     mode=intro;
+    click ();
   }
 }
 

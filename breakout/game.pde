@@ -38,8 +38,8 @@ void game () {
   
   //if it hits the paddle
   if (dist(paddleX, paddleY, ballX, ballY)<paddleD/2+ballD/2) {
-    vy=(ballX-paddleX)/4;
-    vx=(ballY-paddleY)/4;
+    vy=(ballY-paddleY)/4;
+    vx=(ballX-paddleX)/4;
     collide ();
   }
     
@@ -60,6 +60,7 @@ void game () {
   if (lives==0) mode=gameover;
   
   textSize (20);
+  fill (red);
   text ("POINTS:" + points, 725, 40);
   text ("LIVES:" + lives, 75, 40);
   println (mouseX, mouseY);
@@ -76,9 +77,9 @@ void game () {
 
 void gameClick () {
   if (mouseX>725 && mouseX<775 && mouseX>725 && mouseX<775) {//if you click on the pause button
-    fill (0, 100);
+    fill (0, 150);
     noStroke ();
-    rect (0, 0, width, height);
+    rect (0, 0, width, height);//darkens the screen
     mode=pause;
     click ();
   }

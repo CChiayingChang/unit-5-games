@@ -1,15 +1,17 @@
 void gameover () {
-  lives=0;
-  background (0);
-  fill (255);
-  textSize (100);
+  textSize (130);
   if (lives==0) {
+    image (disappointed, 0, 0, width, height);
+    fill (0, 150);
+    rect (0, 0, width, height);
+    fill (red);
     text ("YOU LOSE", 400, 400);
     lose.play ();
-    whichFlose=whichFlose+1;//goes through all the frame numbers
-    if (whichFlose==fNumLOSE) whichFlose=0;//if it gets to the last frame, start from the first frame
-    image (loseGif [whichFlose], 100, 400, 275, 275);
   } else if (points==90) {
+    image (trophy, 0, 0, width, height);
+    fill (0, 150);
+    rect (0, 0, width, height);
+    fill (red);
     text ("YOU WIN", 400, 400);
     win.play ();
     image (winGif [whichFwin], 0, 0, width, height);
@@ -18,25 +20,25 @@ void gameover () {
   }
   
   //restart button
-  tactileButton (150, 350, 675, 735);
-  rect (150, 675, 200, 60);
-  textSize (50);
-  tactileText (150, 350, 675, 735);
-  text ("RESTART", 250, 720);
+  tactileButton (105, 430, 480, 565);
+  rect (105, 480, 325, 85);
+  textSize (65);
+  tactileText (105, 430, 480, 565);
+  text ("RESTART", 268, 550);
   
   
   //exit button
-  tactileButton (450, 650, 675, 735);
-  rect (450, 675, 200, 60);
-  tactileText (450, 650, 675, 735);
-  text ("EXIT", 550, 720);
+  tactileButton (505, 695, 480, 565);
+  rect (505, 480, 190, 85);
+  tactileText (505, 695, 480, 565);
+  text ("EXIT", 600, 550);
   
   println (mouseX, mouseY);
 }
 
 void gameoverClick () {
   //if you click restart
-  if (mouseX>150 && mouseX<350 && mouseY>675 && mouseY<735) {
+  if (mouseX>105 && mouseX<430 && mouseY>480 && mouseY<565) {
     restart ();
     mode=intro;
     click ();
@@ -45,7 +47,7 @@ void gameoverClick () {
   }
   
   //if you click on exit
-  if (mouseX>450 && mouseX<650 && mouseY>675 && mouseY<735) {
+  if (mouseX>505 && mouseX<695 && mouseY>480 && mouseY<565) {
     exit ();
     click ();
   }

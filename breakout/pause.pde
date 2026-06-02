@@ -1,40 +1,45 @@
 void pause () {
-  //play button
-  fill (255);
-  textSize (100);
+  //title
+  fill (red);
+  textSize (150);
   text ("PAUSED", 400, 400);
-  tactileButton (725, 775, 725, 775);
+  
+  //covers play button
   fill (0);
-  rect (725, 725, 50, 50);
-  strokeWeight (5);
-  tactileText (725, 775, 725, 775);
-  triangle (740, 740, 740, 760, 760, 750);
+  noStroke ();
+  rect (720, 720, 60, 60);
   
   //restart button
-  tactileButton (150, 350, 475, 535);
-  rect (150, 475, 200, 60);
-  textSize (50);
-  tactileText (150, 350, 475, 535);
-  text ("RESTART", 250, 520);
-  
+  tactileButton (67, 367, 475, 555);
+  rect (67, 475, 300, 80);
+  textSize (60);
+  tactileText (67, 367, 457, 555);
+  text ("RESTART", 217, 538);
   
   //back to menu button
-  tactileButton (450, 650, 475, 535);
-  rect (450, 475, 200, 60);
-  tactileText (450, 650, 475, 535);
-  text ("MENU", 550, 520);
+  tactileButton (434, 734, 475, 555);
+  rect (434, 475, 300, 80);
+  tactileText (434, 734, 475, 555);
+  text ("MENU", 584, 538);
+  
+  //resume button
+  tactileButton (250, 550, 600, 680);
+  rect (250, 600, 300, 80);
+  tactileText (250, 550, 600, 680);
+  text ("RESUME", 400, 663);
   
   println (mouseX, mouseY);
 }
 
 void pauseClick () {
-  if (mouseX>725 && mouseX<775 && mouseX>725 && mouseX<775) {
-    mode=game; //play button
+  //if you click on resume
+  if (mouseX>250 && mouseX<550 && mouseY>600 && mouseY<680) {
+    mode=game;
     click ();
   }
   
   //if you click restart
-  if (mouseX>150 && mouseX<350 && mouseY>475 && mouseY<535) {
+  if (mouseX>67 && mouseX<367 && mouseY>475 && mouseY<555) {
     restart ();
     mode=game;
     paddleX=width/2;
@@ -42,7 +47,7 @@ void pauseClick () {
   }
   
   //if you click on menu
-  if (mouseX>450 && mouseX<650 && mouseY>475 && mouseY<535) {
+  if (mouseX>434 && mouseX<734 && mouseY>475 && mouseY<555) {
     restart ();
     mode=intro;
     click ();

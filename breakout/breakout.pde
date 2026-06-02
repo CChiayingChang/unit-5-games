@@ -39,20 +39,23 @@ int brickNumber;//for how many bricks there are
 int tempx, tempy;//stores value of first brick
 boolean [] hit; //keeps track if a brick has been hit or not
 
-int points;
-int lives;
+int points, lives;
 
 //gifs
 PImage [] winGif;//the array for the winning gif
 int fNumWIN;//how many frames there are in the win gif
 int whichFwin;//which frame is playing for the win gif
 
-PImage [] loseGif;//the array for the losing gif
-int fNumLOSE;//how many frames there are in the lose gif
-int whichFlose;//which frame is playing for the lose gif
+//intro gif
+PImage [] zoom;
+int frameszoom;//how many frames for the zoom gif
+int whichzoom;//which frame of the zoom gif is playing
 
 Minim minim;
 AudioPlayer click, point, loselife, win, lose, background, collide;
+
+PFont font;
+PImage trophy, disappointed;
 
 void setup () {
   //gif win
@@ -63,15 +66,13 @@ void setup () {
   }
   whichFwin=0;
   
-  //gif lose
-  fNumLOSE=48;
-  loseGif=new PImage [fNumLOSE];
-  for (int i=0; i<=fNumLOSE-1; i+=1) {
-    loseGif [i]=loadImage ("thumbsdown/frame_"+i+"_delay-0.04s.gif");
+  frameszoom=28;
+  zoom= new PImage [frameszoom];
+  for (int i=0; i<=frameszoom-1; i+=1) {
+    zoom [i]=loadImage ("zooming/frame_"+i+"_delay-0.05s.gif");
   }
-  whichFlose=0;
   
-  mode=gameover;
+  mode=intro;
   size (800, 800);
   paddleX=400;
   paddleD=100;
@@ -113,7 +114,12 @@ void setup () {
   loselife=minim.loadFile ("loselife.mp3");
   win=minim.loadFile ("win.mp3");
   lose=minim.loadFile ("lose.mp3");
-  //background=loadFile ("");
+  background=minim.loadFile ("intro.mp3");
+  
+  font=createFont ("dungeon/dungeon.ttf", 100);
+  textFont (font);
+  trophy=loadImage ("trophy.png");
+  disappointed=loadImage ("disappointed.png");
 }
 
 void draw () {
@@ -132,17 +138,17 @@ void tactileButton (int xl, int xr, int yt, int yb) {
   noFill ();
   strokeWeight (3);
   if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
-    stroke (yellow);
-  } else stroke (red);
+    stroke (purple);
+  } else stroke (blue);
 }
 
 void tactileText (int xl, int xr, int yt, int yb) {
   if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
-    fill (red);
-    stroke (red);
-  } else {
-    stroke (yellow);
     fill (yellow);
+    stroke (yellow);
+  } else {
+    stroke (orange);
+    fill (orange);
   }
 }
 
@@ -156,4 +162,4 @@ void collide () {
   collide.play ();
 }
 
-//to do:design, intro music
+//to do:design

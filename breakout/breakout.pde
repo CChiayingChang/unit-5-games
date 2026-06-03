@@ -55,7 +55,8 @@ Minim minim;
 AudioPlayer click, point, loselife, win, lose, background, collide;
 
 PFont font;
-PImage trophy, disappointed;
+PImage trophy;
+PImage disappointed;
 
 void setup () {
   //gif win

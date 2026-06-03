@@ -1,8 +1,10 @@
 void gameover () {
+  background.pause ();
   textSize (130);
   if (lives==0) {
-    image (disappointed, 0, 0, width, height);
+    image (disappointed, 0, 0);
     fill (0, 150);
+    noStroke ();
     rect (0, 0, width, height);
     fill (red);
     text ("YOU LOSE", 400, 400);

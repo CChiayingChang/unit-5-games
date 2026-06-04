@@ -11,8 +11,6 @@ void game () {
   door (800, groundHeight-35);
   fill (255);
   
-  textSize (30);
-  text ("LIVES:" + lives, 800, 40);
   
   obstacle (400, obstacleHeight, 50, 50);
   
@@ -24,22 +22,7 @@ void game () {
     triangle (x, 700, x+25, 700, x+12.5, 650);
   }
   
-  //respawning------------------------------------------------------------------
-  
-  //pauses before it respawns the character
-  if (respawn==false) {//if you didn't die, show the character
-    circle (ballX, ballY, ballD);
-  } else if (respawn==true) {//the character disappears while the timer runs
-    timer=timer+1;
-    fill (red);
-    textSize (150);
-    text ("PSYCHE!", 450, 350);
-  }
-  if (timer>50) {//once the timer is up, show the character
-    respawn=false;
-    timer=0;
-    ballX=100;
-  }
+  menu ();
   
   //movements-----------------------------------------------------
   //keeps ball within screen
@@ -77,7 +60,6 @@ void game () {
   
   //if you fall on the spikes you die
   if (ballY>650) {
-    lives=lives-1;
     ballX=100;
     ballY=525;
     obstacleHeight=groundHeight+25;
@@ -85,29 +67,53 @@ void game () {
   }
   
   //if you reach the gap
-  if (ballX>610) {//if the ball is past a certain point it will show the gap
-    rectMode (CORNER);
-    fill (black);
-    rect (610, groundHeight, 60, 50);
+  if (ballX>610-ballD/2) {//if the ball is past a certain point it will show the gap
+    gap=true;
     if (up==false && ballX>610 && ballX<670)//if the ball is not jumping and it's within the x boundary of gap
     ballY=ballY+10;//starts to fall
     if (ballY>groundHeight) ballX=610+ballD/2;//if it starts falling you can't move past the boundaries of gap-->so you don't get stuck midway down if you move
   }
+  if (gap==true) {//once you pass that point, it will keep showing the gap
+      rectMode (CORNER);
+      fill (black);
+      rect (610, groundHeight, 60, 50);
+    }
   
   //if you reach the door
-  if (dist(800+45/2, groundHeight-35, ballX, ballY)<ballD/2) {
+  if (dist(800+45/2, groundHeight-35, ballX, ballY)<ballD) {//if distance from center of door to center of ball less than diameter of ball
     mode=game2;
   }
   
-  //---------------------------------------------------------------------------
+  //respawning------------------------------------------------------------------
   
+  //pauses before it respawns the character
+  if (respawn==false) {//if you didn't die, show the character
+    fill (white);
+    circle (ballX, ballY, ballD);
+  } else if (respawn==true) {//the character disappears while the timer runs
+    timer=timer+1;
+    fill (red);
+    textSize (150);
+    text ("PSYCHE!", 450, 350);
+    
+    obstacleHeight=groundHeight-25;
+  }
+  if (timer>50) {//once the timer is up, show the character
+    respawn=false;
+    timer=0;
+    ballX=100;
+    //resets the obstacle height
+    obstacleHeight=groundHeight+25;
+    gap=false;//hide the gap again
+  }
 }
+  
+//------------------------------------------------------------------------
 
 void obstacle (int x, int y, int w, int h) {
   rectMode (CENTER);
   rect (x, y, w, h);
   if (dist(ballX, ballY, x, y)<ballD/2+w/2) {//if you hit the obstacle
-    lives=lives-1;
     ballX=100;
       respawn=true;
       obstacleHeight=groundHeight+25;
@@ -115,5 +121,9 @@ void obstacle (int x, int y, int w, int h) {
 }
 
 void gameClick () {
-
+  if (mouseX>845 && mouseX<875 && mouseY>25 && mouseY<45) {//if you click on menu
+    mode=pause;
+    fill (black, 150);
+    rect (0, 0, width, height);
+  }
 }

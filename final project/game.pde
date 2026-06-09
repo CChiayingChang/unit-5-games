@@ -11,7 +11,6 @@ void game () {
   door (800, groundHeight-35);
   fill (255);
   
-  
   obstacle (400, obstacleHeight, 50, 50);
   
   rectMode (CORNER);
@@ -25,6 +24,75 @@ void game () {
   menu ();
   
   //movements-----------------------------------------------------
+  
+  movement ();
+
+  //gameplay----------------------------------------------------------------
+  
+  if (mode==game) {
+  
+    //if you get close to the obstacle it starts rising
+    if (dist(ballX, ballY, 400, obstacleHeight)<ballD/2+100) {
+      obstacleHeight=obstacleHeight-2;
+      if (obstacleHeight<(groundHeight-25)) {
+        obstacleHeight=groundHeight-25;//once the obstacle gets to a certain height it stops there
+      }
+    }
+    
+    //if you fall on the spikes you die
+    if (ballY>650) {
+      ballX=100;
+      ballY=525;
+      obstacleHeight=groundHeight+25;
+      respawn=true;
+    }
+    
+    //if you reach the gap
+    if (ballX>610-ballD/2) {//if the ball is past a certain point it will show the gap
+      gap=true;
+      if (up==false && ballX>610 && ballX<670)//if the ball is not jumping and it's within the x boundary of gap
+      ballY=ballY+10;//starts to fall
+      if (ballY>groundHeight) ballX=610+ballD/2;//if it starts falling you can't move past the boundaries of gap-->so you don't get stuck midway down if you move
+    }
+    if (gap==true) {//once you pass that point, it will keep showing the gap
+        rectMode (CORNER);
+        fill (black);
+        rect (610, groundHeight, 60, 50);
+      }
+    
+    //if you reach the door
+    if (dist(800+45/2, groundHeight-35, ballX, ballY)<ballD) {//if distance from center of door to center of ball less than diameter of ball
+      mode=game2;
+    }
+  }
+ 
+ respawn ();
+ 
+}
+
+
+  
+//------------------------------------------------------------------------
+
+void obstacle (int x, int y, int w, int h) {
+  rectMode (CENTER);
+  rect (x, y, w, h);
+  if (dist(ballX, ballY, x, y)<ballD/2+w/2) {//if you hit the obstacle
+    ballX=100;
+      respawn=true;
+      obstacleHeight=groundHeight+25;
+  }
+}
+
+void gameClick () {
+  if (mouseX>845 && mouseX<875 && mouseY>25 && mouseY<45) {//if you click on menu
+    mode=pause;
+    fill (black, 150);
+    rect (0, 0, width, height);
+  }
+}
+
+void movement () {
   //keeps ball within screen
   if (ballX<ballD/2) {
     ballX=ballD/2;
@@ -48,44 +116,9 @@ void game () {
     jumpTimer=0;
     up=false;
   }
-  //gameplay----------------------------------------------------------------
-  
-  //if you get close to the obstacle it starts rising
-  if (dist(ballX, ballY, 400, obstacleHeight)<ballD/2+100) {
-    obstacleHeight=obstacleHeight-2;
-    if (obstacleHeight<(groundHeight-25)) {
-      obstacleHeight=groundHeight-25;//once the obstacle gets to a certain height it stops there
-    }
-  }
-  
-  //if you fall on the spikes you die
-  if (ballY>650) {
-    ballX=100;
-    ballY=525;
-    obstacleHeight=groundHeight+25;
-    respawn=true;
-  }
-  
-  //if you reach the gap
-  if (ballX>610-ballD/2) {//if the ball is past a certain point it will show the gap
-    gap=true;
-    if (up==false && ballX>610 && ballX<670)//if the ball is not jumping and it's within the x boundary of gap
-    ballY=ballY+10;//starts to fall
-    if (ballY>groundHeight) ballX=610+ballD/2;//if it starts falling you can't move past the boundaries of gap-->so you don't get stuck midway down if you move
-  }
-  if (gap==true) {//once you pass that point, it will keep showing the gap
-      rectMode (CORNER);
-      fill (black);
-      rect (610, groundHeight, 60, 50);
-    }
-  
-  //if you reach the door
-  if (dist(800+45/2, groundHeight-35, ballX, ballY)<ballD) {//if distance from center of door to center of ball less than diameter of ball
-    mode=game2;
-  }
-  
-  //respawning------------------------------------------------------------------
-  
+}
+
+void respawn () {
   //pauses before it respawns the character
   if (respawn==false) {//if you didn't die, show the character
     fill (white);
@@ -105,25 +138,5 @@ void game () {
     //resets the obstacle height
     obstacleHeight=groundHeight+25;
     gap=false;//hide the gap again
-  }
-}
-  
-//------------------------------------------------------------------------
-
-void obstacle (int x, int y, int w, int h) {
-  rectMode (CENTER);
-  rect (x, y, w, h);
-  if (dist(ballX, ballY, x, y)<ballD/2+w/2) {//if you hit the obstacle
-    ballX=100;
-      respawn=true;
-      obstacleHeight=groundHeight+25;
-  }
-}
-
-void gameClick () {
-  if (mouseX>845 && mouseX<875 && mouseY>25 && mouseY<45) {//if you click on menu
-    mode=pause;
-    fill (black, 150);
-    rect (0, 0, width, height);
   }
 }

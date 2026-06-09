@@ -8,6 +8,7 @@ final int game=3;
 final int pause=4;
 final int gameover=5;
 final int game2=6;
+final int game3=7;
 
 int ballX;
 int ballY;
@@ -43,8 +44,9 @@ boolean level1;
 boolean level2;
 boolean level3;
 
+PImage dotted_line;
 void setup () {
-  mode=map;
+  mode=game2;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
@@ -70,6 +72,8 @@ void setup () {
   level1=true;
   level2=false;
   level3=false;
+  
+  dotted_line=loadImage ("dotted_line.png");
 }
 
 void draw () {
@@ -81,7 +85,9 @@ void draw () {
     game ();
   } else if (mode==game2) {
     game2 ();
-  }else if (mode==pause) {
+  }else if (mode==game3) {
+    game3 ();
+  }else if(mode==pause) {
     pause ();
   } else if (mode==gameover) {
     gameover ();
@@ -103,10 +109,18 @@ void tactileButton (int xl, int xr, int yt, int yb) {
   strokeWeight (3);
   if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
     stroke (white);
-    textSize (65);
+    textSize (60);
   } else {
     noStroke ();
-    textSize (60);
+    textSize (55);
+  }
+}
+
+void tactileMap (int x, int y, int d) {
+  if (dist(x, y, mouseX, mouseY)<d/2) {
+    stroke (white);
+  } else {
+    noStroke ();
   }
 }
 

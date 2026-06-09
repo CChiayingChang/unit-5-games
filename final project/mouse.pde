@@ -5,11 +5,17 @@ void mouseReleased () {
     mapClick ();
   } else if (mode==game) {
     gameClick ();
+  } else if (mode==game2) {
+    game2Click ();
+  } else if (mode==game3) {
+    game3Click ();
   } else if (mode==pause) {
     pauseClick ();
   } else if (mode==gameover) {
     gameoverClick ();
-  } else {
+  } else if (mode==map) {
+    mapClick ();
+  }{
     println ("Error: Mode = " + mode);
   }
 }

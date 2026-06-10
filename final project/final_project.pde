@@ -14,6 +14,8 @@ int ballX;
 int ballY;
 int ballD;
 
+int doorX, doorY;//coordinates for the door
+
 //keyboard
 boolean up;//if up=true, jump; else, don't jump
 boolean right;
@@ -49,7 +51,7 @@ PImage dotted_line;
 int progress;//for keeping track of what level to go to in pause
 
 void setup () {
-  mode=map;
+  mode=game2;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
@@ -81,6 +83,9 @@ void setup () {
   dotted_line=loadImage ("dotted_line.png");
   
   progress=1;
+  
+  doorX=800;
+  doorY=groundHeight-35;
 }
 
 void draw () {
@@ -103,12 +108,12 @@ void draw () {
   }
 }
 
-void door (int x, int y) {
+void door () {
   rectMode (CENTER);
   fill (brown);
-  rect (x, y, 45, 70, 50, 50, 0, 0);
+  rect (doorX, doorY, 45, 70, 50, 50, 0, 0);
   fill (blue);
-  rect (x, y+3, 30, 63, 50, 50, 0, 0);
+  rect (doorX, doorY+3, 30, 63, 50, 50, 0, 0);
 }
 
 void tactileButton (int xl, int xr, int yt, int yb) {

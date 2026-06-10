@@ -1,6 +1,8 @@
 void game2 () {
   //setup---------------------------------------------------------------------
   
+  level2=true;//on the map level 2 turns red and clickable
+  
   progress=2;
  
   println (mouseX, mouseY);
@@ -10,14 +12,23 @@ void game2 () {
   textSize (50);
   text ("LEVEL 2", 450, 50);
   
-  door (800, 60);
+  doorX=800;
+  doorY=310;
+  door ();
   fill (255);
   
-  obstacle (400, obstacleHeight, 50, 50);
+  groundHeight=650;
   
   rectMode (CORNER);
-  groundHeight=650;
-  rect (0, groundHeight, width, 50);//ground
+  rect (0, 650, width, 50);//ground
+  
+  rect (0, 550, 100, 50);//overhead hang
+  
+  rect (200, 490, 100, 50);
+  
+  rect (400, 430, 100, 50);
+  
+  rect (600, 370, 100, 50);
   
   menu ();
   
@@ -47,25 +58,30 @@ void game2 () {
     up=false;
   }
 
-  //gameplay----------------------------------------------------------------
-  
-  //if you get close to the obstacle it starts rising
-  if (dist(ballX, ballY, 400, obstacleHeight)<ballD/2+100) {
-    obstacleHeight=obstacleHeight-2;
-    if (obstacleHeight<(groundHeight-25)) {
-      obstacleHeight=groundHeight-25;//once the obstacle gets to a certain height it stops there
-    }
+ //respawn-----------------------------------------------------------------------------------------------
+ //pauses before it respawns the character
+  if (respawn==false) {//if you didn't die, show the character
+    fill (white);
+    circle (ballX, ballY, ballD);
+  } else if (respawn==true) {//the character disappears while the timer runs
+    timer=timer+1;
+    fill (red);
+    textSize (150);
+    text ("PSYCHE!", 450, 350);
+    
+    obstacleHeight=groundHeight-25;
+  }
+  if (timer>50) {//once the timer is up, show the character
+    respawn=false;
+    timer=0;
+    ballX=100;
+    ballY=groundHeight-25;
+    //resets the obstacle height
+    obstacleHeight=groundHeight+25;
+    gap=false;//hide the gap again
   }
   
-  
-  if (gap==true) {//once you pass that point, it will keep showing the gap
-      rectMode (CORNER);
-      fill (black);
-      rect (610, groundHeight, 60, 50);
-    }
-  
- 
- respawn ();
+  //-------------------------------------------------------------------------------------
  
 }
 

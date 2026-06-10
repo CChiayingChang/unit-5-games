@@ -3,6 +3,8 @@ void game () {
  
  progress=1;//variable to keep track of what level you're on so when you resume from pause it knows what level to resume to
  
+ groundHeight=550;
+ 
   println (mouseX, mouseY);
   background (black);
   
@@ -10,7 +12,7 @@ void game () {
   textSize (50);
   text ("LEVEL 1", 450, 50);
   
-  door (800, groundHeight-35);
+  door ();
   fill (255);
   
   obstacle (400, obstacleHeight, 50, 50);
@@ -54,7 +56,9 @@ void game () {
       gap=true;
       if (up==false && ballX>610 && ballX<670)//if the ball is not jumping and it's within the x boundary of gap
       ballY=ballY+10;//starts to fall
-      if (ballY>groundHeight) ballX=610+ballD/2;//if it starts falling you can't move past the boundaries of gap-->so you don't get stuck midway down if you move
+      if (ballY>groundHeight-20) {
+        ballX=610+ballD/2;//if it starts falling you can't move past the boundaries of gap-->so you don't get stuck midway down if you move
+      }
     }
     if (gap==true) {//once you pass that point, it will keep showing the gap
         rectMode (CORNER);
@@ -117,7 +121,8 @@ void movement () {
     ballY=groundHeight-ballD/2;
     jumpTimer=0;
     up=false;
-  }
+ } else if (gap==false) ballY=groundHeight-25;
+  
 }
 
 void respawn () {

@@ -13,17 +13,27 @@ void map () {
   text ("2", 435, 250);
   text ("3", 725, 375);
   println (mouseX, mouseY);
+  
+  //back button
+  tactileButton (45, 145, 600, 650);
+  rect (45, 600, 100, 50);
+  fill (white);
+  triangle (55, 625, 80, 610, 80, 640);
+  rect (80, 620, 50, 10);
 }
 
 void mapClick () {
   if (dist(mouseX, mouseY, 130, 415)<50) {//if you click on level 1
    mode=game;
   }
-  if (dist(mouseX, mouseY, 435, 250)<50 && level2==true) {
+  if (dist(mouseX, mouseY, 435, 250)<50 && level2==true) {//if you click on level 2
     mode=game2;
   }
-  if (dist(mouseX, mouseY, 725, 375)<50 && level3==true) {
+  if (dist(mouseX, mouseY, 725, 375)<50 && level3==true) {//if you click on level 3
     mode=game3;
+  }
+  if (mouseX>45 && mouseX<145 && mouseY>600 && mouseY<650) {
+    mode=intro;
   }
 }
 

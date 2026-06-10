@@ -1,5 +1,7 @@
 void game2 () {
   //setup---------------------------------------------------------------------
+  
+  progress=2;
  
   println (mouseX, mouseY);
   background (black);
@@ -15,9 +17,7 @@ void game2 () {
   
   rectMode (CORNER);
   groundHeight=650;
-  ballY=groundHeight-25;
   rect (0, groundHeight, width, 50);//ground
-  ballX=100;
   
   menu ();
   
@@ -76,5 +76,9 @@ void game2 () {
 
 
 void game2Click () {
-  
+    if (mouseX>845 && mouseX<875 && mouseY>25 && mouseY<45) {//if you click on menu
+    mode=pause;
+    fill (black, 150);
+    rect (0, 0, width, height);
+  }
 }

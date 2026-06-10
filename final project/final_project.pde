@@ -45,35 +45,42 @@ boolean level2;
 boolean level3;
 
 PImage dotted_line;
+
+int progress;//for keeping track of what level to go to in pause
+
 void setup () {
-  mode=game2;
+  mode=map;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
   
-  ballX=100;
-  ballY=525;
-  ballD=50;
-  
+  //for the keyboard
   up=false;
   right=false;
   left=false;
   
   groundHeight=550;
-  jumpTimer=0;
+  jumpTimer=0;//for the timing of up and down for jumping
   
-  timer=0;
+  ballX=100;
+  ballY=groundHeight-25;
+  ballD=50;
+  
+  timer=0;//when you die times the character's reappearance
   respawn=false;
   
   obstacleHeight=(groundHeight+25);
   
   gap=false;
   
+  //for the colours of the levels on the map
   level1=true;
   level2=false;
   level3=false;
   
   dotted_line=loadImage ("dotted_line.png");
+  
+  progress=1;
 }
 
 void draw () {

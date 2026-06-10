@@ -23,10 +23,14 @@ void pause () {
 
 void pauseClick () {
   if (mouseX>56 && mouseX<281 && mouseY>400 && mouseY<475) {///if you click on resume
-    mode=game;
+    if (progress==1) mode=game;
+    else if (progress==2) mode=game2;
+    else if (progress==3) mode=game3;
   }
   if (mouseX>337 && mouseX<562 && mouseY>400 && mouseY<475) {
-    mode=game;
+    if (progress==1) mode=game;
+    else if (progress==2) mode=game2;
+    else if (progress==3) mode=game3;
     obstacleHeight=groundHeight+25;
     gap=false;
     ballX=100;

@@ -1,6 +1,8 @@
 void game () {
  //setup--------------------------------------------------------------------- 
  
+ progress=1;//variable to keep track of what level you're on so when you resume from pause it knows what level to resume to
+ 
   println (mouseX, mouseY);
   background (black);
   

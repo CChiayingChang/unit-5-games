@@ -25,6 +25,7 @@ boolean respawn;//when respawn=false, show character; when respawn=true, don't s
 int timer;//timer for when you die-->when you die respawn=true and timer starts, when timer is up respawn=false
 
 int groundHeight;
+int platformHeight;
 
 int jumpTimer;//timing for the jumping-->rising, falling
 //int jump;
@@ -50,11 +51,16 @@ PImage dotted_line;
 
 int progress;//for keeping track of what level to go to in pause
 
+PFont font;
+
 void setup () {
   mode=game2;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
+  
+  font=createFont ("boston/BOSTON CAPS.ttf", 50);
+  textFont (font);
   
   //for the keyboard
   up=false;
@@ -62,6 +68,7 @@ void setup () {
   left=false;
   
   groundHeight=550;
+  platformHeight=550;//for the floating platforms
   jumpTimer=0;//for the timing of up and down for jumping
   
   ballX=100;

@@ -3,7 +3,7 @@ void intro () {
   
   fill (red);
   textSize (200);
-  text ("PSYCHE", 450, 275);
+  text ("SIKE", 450, 275);
   textSize (30);
   fill (white);
   text ("Avoid the hidden obstacles!", 450, 400);

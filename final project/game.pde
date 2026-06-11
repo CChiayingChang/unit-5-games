@@ -12,6 +12,8 @@ void game () {
   textSize (50);
   text ("LEVEL 1", 450, 50);
   
+  doorX=800;
+  doorY=groundHeight-35;
   door ();
   fill (255);
   
@@ -134,7 +136,7 @@ void respawn () {
     timer=timer+1;
     fill (red);
     textSize (150);
-    text ("PSYCHE!", 450, 350);
+    text ("SIKE!", 450, 350);
     
     obstacleHeight=groundHeight-25;
   }

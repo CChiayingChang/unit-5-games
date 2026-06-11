@@ -25,6 +25,13 @@ void map () {
 void mapClick () {
   if (dist(mouseX, mouseY, 130, 415)<50) {//if you click on level 1
    mode=game;
+   respawn=false;
+   timer=0;
+   ballX=100;
+   //resets the obstacle height
+   obstacleHeight=groundHeight+25;
+   gap=false;//hide the gap again
+   groundHeight=550;
   }
   if (dist(mouseX, mouseY, 435, 250)<50 && level2==true) {//if you click on level 2
     mode=game2;

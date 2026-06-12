@@ -50,33 +50,46 @@ void game2 () {
   if (right==true) ballX=ballX+10;
   if (left==true) ballX=ballX-10;
   
-  //jumping
-  if (up==true) jumpTimer=jumpTimer+1;
-  if (jumpTimer>0 && jumpTimer<=10) {
-    ballY=ballY-15;
-  } else if (jumpTimer>10 && jumpTimer<20) {
-    ballY=ballY+15;
-  } else if (jumpTimer==20) {
-    if ((ballX>0 && ballX<125) || (ballX>175 && ballX<325) || (ballX>375 && ballX<525) || ballX>575 && ballX<725) {//if ballX is on platformm
-      if (ballY<groundHeight-ballD/2-15) {
-        //if you're on platform you land on platform
-        ballY=platformHeight-ballD/2;
+  if ((ballX>0 && ballX<125) || (ballX>175 && ballX<325) || (ballX>375 && ballX<525) || (ballX>575 && ballX<725)) {//if you're in x range of the platforms
+    if (ballY>platformHeight+50+25) {//if you're under the platform
+        if (up==true) jumpTimer=jumpTimer+1;
+        if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
+        else if (jumpTimer>10 && jumpTimer<20) ballY=ballY+15;
+        else if (jumpTimer==20) {
+          ballY=groundHeight-25;
+          jumpTimer=0;
+          up=false;
+        }
+    } else {//if you're on top of the platform
+      if (up==true) jumpTimer=jumpTimer+1;
+      if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
+      else if (jumpTimer>10 && jumpTimer<20) ballY=ballY+15;
+      else if (jumpTimer==20) {
+        ballY=platformHeight-25;
+        jumpTimer=0;
+        up=false;
       }
     }
-    else ballY=groundHeight-ballD/2;//if you're on the ground you land on the ground
-    jumpTimer=0;
-    up=false;
   }
   
-  //if you walk off a platform you fall
-  if ((ballX>125 && ballX<175) || (ballX>325 && ballX<375) || (ballX>525 && ballX<575) || ballX>725) {
-    if (ballY<groundHeight-25 && up==false) {
-      ballY=ballY+15;
+  if ((ballX>125 && ballX<175) || (ballX>325 && ballX<375) || (ballX>525 && ballX<575) || ballX>725) {//if you're between the platforms (x)
+    if (up==true) jumpTimer=jumpTimer+1;
+    if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
+    else if (jumpTimer>10 && jumpTimer<20) ballY=ballY+15;
+    else if (jumpTimer==20) {
+      ballY=groundHeight-25;
+      jumpTimer=0;
+      up=false;
     }
   }
-  
-  //if you're under the first platform you can't jump
-  if (ballX<100+ballD/4 && ballY>groundHeight-ballD/2) jumpTimer=20;
+
+  //if you walk off a platform you fall
+  if ((ballX>112 && ballX<188) || (ballX>312 && ballX<388) || (ballX>512 && ballX<588) || ballX>712) {
+    if (up==false) {
+      ballY=ballY+15;
+    }
+    if (ballY>groundHeight-25) ballY=groundHeight-25;
+  }
 
  //respawn-----------------------------------------------------------------------------------------------
  //pauses before it respawns the character

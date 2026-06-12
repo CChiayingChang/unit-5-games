@@ -115,11 +115,9 @@ void movement () {
   
   //jumping
   if (up==true) jumpTimer=jumpTimer+1;
-  if (jumpTimer>0 && jumpTimer<=10) {
-    ballY=ballY-15;
-  } else if (jumpTimer>10 && jumpTimer<20) {
-    ballY=ballY+15;
-  } else if (jumpTimer==20) {
+  if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
+  else if (jumpTimer>10 && jumpTimer<20) ballY=ballY+15;
+  else if (jumpTimer==20) {
     ballY=groundHeight-ballD/2;
     jumpTimer=0;
     up=false;

@@ -32,6 +32,7 @@ void pauseClick () {
     else if (progress==2) {
       mode=game2;
       ballY=platformHeight-25;
+      ballX=100;
     }
     else if (progress==3) mode=game3;
     obstacleHeight=groundHeight+25;

@@ -54,7 +54,7 @@ int progress;//for keeping track of what level to go to in pause
 PFont font;
 
 void setup () {
-  mode=game2;
+  mode=intro;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
@@ -115,12 +115,12 @@ void draw () {
   }
 }
 
-void door () {
+void door (int x, int y) {
   rectMode (CENTER);
   fill (brown);
-  rect (doorX, doorY, 45, 70, 50, 50, 0, 0);
+  rect (x, y, 45, 70, 50, 50, 0, 0);
   fill (blue);
-  rect (doorX, doorY+3, 30, 63, 50, 50, 0, 0);
+  rect (x, y+3, 30, 63, 50, 50, 0, 0);
 }
 
 void tactileButton (int xl, int xr, int yt, int yb) {

@@ -12,11 +12,21 @@ void game2 () {
   textSize (50);
   text ("LEVEL 2", 450, 50);
   
-  doorX=800;
-  doorY=310;
-  door ();
+  //door---------------------------------------------------------------
+  
+  if (ballX>740) {
+    doorX=doorX-10;
+    doorY=doorY+10;
+  } else {
+    doorX=800;
+    doorY=310;
+  }
+  if (doorX<200) doorX=200;
+  if (doorY>groundHeight-35) doorY=groundHeight-35;
+  door (doorX, doorY);
   fill (255);
   
+  //-----------------------------------------------------------------------------
   groundHeight=650;
   
   rectMode (CORNER);
@@ -50,33 +60,27 @@ void game2 () {
   if (right==true) ballX=ballX+10;
   if (left==true) ballX=ballX-10;
   
-  if ((ballX>0 && ballX<125) || (ballX>175 && ballX<325) || (ballX>375 && ballX<525) || (ballX>575 && ballX<725)) {//if you're in x range of the platforms
+  if ((ballX>0 && ballX<112) || (ballX>188 && ballX<312) || (ballX>388 && ballX<512) || (ballX>588 && ballX<712)) {//if you're in x range of the platforms
     if (ballY>platformHeight+50+25) {//if you're under the platform
-        if (up==true) jumpTimer=jumpTimer+1;
-        if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
-        else if (jumpTimer>10 && jumpTimer<20) ballY=ballY+15;
-        else if (jumpTimer==20) {
-          ballY=groundHeight-25;
-          jumpTimer=0;
-          up=false;
-        }
-    } else {//if you're on top of the platform
-      if (up==true) jumpTimer=jumpTimer+1;
-      if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
-      else if (jumpTimer>10 && jumpTimer<20) ballY=ballY+15;
-      else if (jumpTimer==20) {
-        ballY=platformHeight-25;
+        jump ();
+        if (jumpTimer==20) {
+        ballY=groundHeight-25;
         jumpTimer=0;
         up=false;
-      }
+    }
+  } else {//if you're on top of the platform
+    jump ();
+    if (jumpTimer==20) {
+      ballY=platformHeight-25;
+      jumpTimer=0;
+      up=false;
     }
   }
+ }
   
-  if ((ballX>125 && ballX<175) || (ballX>325 && ballX<375) || (ballX>525 && ballX<575) || ballX>725) {//if you're between the platforms (x)
-    if (up==true) jumpTimer=jumpTimer+1;
-    if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
-    else if (jumpTimer>10 && jumpTimer<20) ballY=ballY+15;
-    else if (jumpTimer==20) {
+  if ((ballX>112 && ballX<188) || (ballX>312 && ballX<388) || (ballX>512 && ballX<588) || ballX>712) {//if you're between the platforms (x)
+   jump ();
+   if (jumpTimer==20) {
       ballY=groundHeight-25;
       jumpTimer=0;
       up=false;
@@ -90,6 +94,7 @@ void game2 () {
     }
     if (ballY>groundHeight-25) ballY=groundHeight-25;
   }
+  
 
  //respawn-----------------------------------------------------------------------------------------------
  //pauses before it respawns the character
@@ -130,4 +135,10 @@ void game2Click () {
     fill (black, 150);
     rect (0, 0, width, height);
   }
+}
+
+void jump () {
+  if (up==true) jumpTimer=jumpTimer+1;
+  if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
+  else if (jumpTimer>10 && jumpTimer<20) ballY=ballY+15;
 }

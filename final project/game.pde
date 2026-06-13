@@ -14,7 +14,7 @@ void game () {
   
   doorX=800;
   doorY=groundHeight-35;
-  door ();
+  door (doorX, doorY);
   fill (255);
   
   obstacle (400, obstacleHeight, 50, 50);

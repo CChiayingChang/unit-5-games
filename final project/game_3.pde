@@ -43,6 +43,9 @@ void game3 () {
     moveDoor=false;
     obstacle3X=615;
     moveobstacle3=false;
+    stopJump=false;
+    obstacle3Timer=0;
+    obstacle3Y=500;
   }
   
   movement ();
@@ -53,6 +56,7 @@ void game3 () {
     gap=true;//why only work if gap=true?????
     ballY=ballY+15;
     ballX=450;
+    stopJump=true;
   }
   if (ballY>height) respawn=true;
   
@@ -61,11 +65,24 @@ void game3 () {
     ballX=obstacle3X-ballD/2;//the ball can't go past the obstacle
     moveobstacle3=true;
   }
-  if (moveobstacle3==true) {
+  if (moveobstacle3==true && obstacle3Timer==0) {
     obstacle3X=obstacle3X-10;//if you touch the obstacle the obstacle moves back and pushes you into the gap
+    obstacle3Y=obstacle3Y-10;
     if (obstacle3X<500) obstacle3X=500;// obstacle stops at the gap
+    if (obstacle3Y<350 && obstacle3Timer==0) obstacle3Y=350;
   }
   
+  if (obstacle3X<=500) obstacle3Timer=obstacle3Timer+1;
+  if (obstacle3Timer>200 && obstacle3Y<1500) {
+    obstacle3Y=obstacle3Y+10;
+  }
+  if (obstacle3Timer>1500) {
+    obstacle3Timer=0;
+    obstacle3X=900;
+    println (obstacle3X);
+  }
+  
+  //--------------------------------------------------------------------
 }
 
 void game3Click () {
@@ -79,5 +96,7 @@ void game3Click () {
 void obstacle3 () {
   fill (white);
   rectMode (CORNER);
-  rect (obstacle3X, obstacle3Y, 75, 150);
+  rect (obstacle3X, obstacle3Y, 75, 500);
 }
+
+//make it so that if you get pushed by the obstacle and fall in the gap, ur unable to go through the walls

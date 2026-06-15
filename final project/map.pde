@@ -44,6 +44,12 @@ void mapClick () {
   }
   if (dist(mouseX, mouseY, 725, 375)<50 && level3==true) {//if you click on level 3
     mode=game3;
+    ballX=100;
+    ballY=475;
+    obstacle3X=615;
+    obstacle3Y=500;
+    obstacle3Timer=0;
+    stopJump=false;
   }
   if (mouseX>45 && mouseX<145 && mouseY>600 && mouseY<650) {
     mode=intro;

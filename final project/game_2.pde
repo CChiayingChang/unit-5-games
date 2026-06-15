@@ -40,7 +40,8 @@ void game2 () {
   rectMode (CORNER);
   rect (0, 650, width, 50);//ground
   
-  rect (0, 550, 90, 50);//overhead hang
+  //platforms
+  rect (0, 550, 90, 50);
   if (ballX>0 && ballX<100) platformHeight=550;
   
   rect (200, 490, 100, 50);
@@ -142,11 +143,13 @@ void game2 () {
   if (timer>50) {//once the timer is up, show the character
     respawn=false;
     timer=0;
-    ballX=100;
+    ballX=50;
+    ballY=525;
     doorX=800;
     doorY=310;
     gap=false;//hide the gap again
     moveDoor=false;
+    stopJump=false;
   }
   
   //gap-------------------------------------------------------------------------------------
@@ -157,6 +160,7 @@ void game2 () {
       if (ballY>groundHeight-20) {
         ballX=250+ballD/2;//if it starts falling you can't move past the boundaries of gap-->so you don't get stuck midway down if you move
         respawn=true;
+        stopJump=true;
       }
     }
     if (gap==true) {//once you pass that point, it will keep showing the gap
@@ -190,3 +194,4 @@ void jump () {
 
 
 //make it so that the door wil move when you get to that point and not stop moving as soon as you move out of range
+//make it so that you can't move through the platforms

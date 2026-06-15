@@ -58,6 +58,7 @@ void game () {
       if (up==false && ballX>610 && ballX<670) ballY=ballY+10;//if the ball is not jumping and it's within the x boundary of gap, strats to fall
       if (ballY>groundHeight-20) {
         ballX=610+ballD/2;//if it starts falling you can't move past the boundaries of gap-->so you don't get stuck midway down if you move
+        stopJump=true;
       }
     }
     if (gap==true) {//once you pass that point, it will keep showing the gap
@@ -119,14 +120,15 @@ void movement () {
   if (left==true) ballX=ballX-10;
   
   //jumping
-  if (up==true) jumpTimer=jumpTimer+1;
-  if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
-  else if (jumpTimer>10 && jumpTimer<20) ballY=ballY+15;
-  else if (jumpTimer==20) {
-    ballY=groundHeight-ballD/2;
-    jumpTimer=0;
-    up=false;
- } else if (gap==false) ballY=groundHeight-25;
+    if (up==true) jumpTimer=jumpTimer+1;
+    if (jumpTimer>0 && jumpTimer<=10 && stopJump==false) ballY=ballY-15;
+    else if (jumpTimer>10 && jumpTimer<20) ballY=ballY+15;
+    else if (jumpTimer==20) {
+      ballY=groundHeight-ballD/2;
+      jumpTimer=0;
+      up=false;
+   } else if (gap==false) ballY=groundHeight-25;
+ 
   
 }
 
@@ -150,6 +152,7 @@ void respawn () {
     //resets the obstacle height
     obstacleHeight=groundHeight+25;
     gap=false;//hide the gap again
+    stopJump=false;
   }
 }
 

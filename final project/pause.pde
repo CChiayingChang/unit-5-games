@@ -28,6 +28,7 @@ void pauseClick () {
     else if (progress==3) mode=game3;
   }
   if (mouseX>337 && mouseX<562 && mouseY>400 && mouseY<475) {//if you click on restart
+  stopJump=false;
     if (progress==1) {
       mode=game;
       gap=false;
@@ -44,6 +45,12 @@ void pauseClick () {
     }
     else if (progress==3) {
       mode=game3;
+      obstacle3Y=500;
+      obstacle3X=615;
+      ballX=100;
+      ballY=475;
+      stopJump=false;
+      obstacle3Timer=0;
     }
     obstacleHeight=groundHeight+25;
     gap=false;

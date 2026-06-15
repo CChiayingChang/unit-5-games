@@ -56,8 +56,11 @@ boolean moveDoor;
 
 int obstacle3X;//for the x coordiante of the obstacle in level 3
 int obstacle3Y;//for the y value of the obstacle in level 3
+int obstacle3Timer;//to make the obstacle pause before it disappears
 
 boolean moveobstacle3;
+
+boolean stopJump;//prevents you from being able to jump if you're in a gap
 
 void setup () {
   mode=game3;
@@ -103,8 +106,11 @@ void setup () {
   
   //the obstacle in level 3
   obstacle3X=615;
-  obstacle3Y=350;
+  obstacle3Y=500;
   moveobstacle3=false;
+  obstacle3Timer=0;
+  
+  stopJump=false;
 }
 
 void draw () {

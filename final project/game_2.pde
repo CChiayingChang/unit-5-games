@@ -5,7 +5,6 @@ void game2 () {
   
   progress=2;//tracks what mode to return to for pause screen
  
-  println (mouseX, mouseY);
   background (black);
   
   fill (white);
@@ -26,8 +25,13 @@ void game2 () {
   door (doorX, doorY);
   fill (255);
   
+  //if you win-----------------------------------------------------------------------
+  
   if (dist(200+45/2, groundHeight-35, ballX, ballY)<ballD && doorX==200) {
     mode=game3;
+    respawn=false;
+    ballX=100;
+    ballY=475;
   }
   
   //-----------------------------------------------------------------------------
@@ -139,8 +143,6 @@ void game2 () {
     respawn=false;
     timer=0;
     ballX=100;
-    ballY=525;
-    //resets the obstacle height
     doorX=800;
     doorY=310;
     gap=false;//hide the gap again

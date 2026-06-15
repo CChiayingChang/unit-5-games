@@ -42,7 +42,9 @@ void pauseClick () {
       gap=false;
       moveDoor=false;
     }
-    else if (progress==3) mode=game3;
+    else if (progress==3) {
+      mode=game3;
+    }
     obstacleHeight=groundHeight+25;
     gap=false;
     ballX=100;

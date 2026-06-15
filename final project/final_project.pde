@@ -54,8 +54,13 @@ PFont font;
 
 boolean moveDoor;
 
+int obstacle3X;//for the x coordiante of the obstacle in level 3
+int obstacle3Y;//for the y value of the obstacle in level 3
+
+boolean moveobstacle3;
+
 void setup () {
-  mode=game2;
+  mode=game3;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
@@ -95,6 +100,11 @@ void setup () {
   doorX=800;
   doorY=groundHeight-35;
   moveDoor=false;
+  
+  //the obstacle in level 3
+  obstacle3X=615;
+  obstacle3Y=350;
+  moveobstacle3=false;
 }
 
 void draw () {
@@ -123,6 +133,7 @@ void door (int x, int y) {
   rect (x, y, 45, 70, 50, 50, 0, 0);
   fill (blue);
   rect (x, y+3, 30, 63, 50, 50, 0, 0);
+  rectMode (CORNER);
 }
 
 void tactileButton (int xl, int xr, int yt, int yb) {

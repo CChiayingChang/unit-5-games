@@ -5,7 +5,6 @@ void game () {
  
  groundHeight=550;
  
-  println (mouseX, mouseY);
   background (black);
   
   fill (white);

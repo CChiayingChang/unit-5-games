@@ -28,7 +28,6 @@ int groundHeight;
 int platformHeight;
 
 int jumpTimer;//timing for the jumping-->rising, falling
-//int jump;
 
 //colour palette
 color red=#EA0014;
@@ -53,8 +52,10 @@ int progress;//for keeping track of what level to go to in pause
 
 PFont font;
 
+boolean moveDoor;
+
 void setup () {
-  mode=intro;
+  mode=game2;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
@@ -93,6 +94,7 @@ void setup () {
   
   doorX=800;
   doorY=groundHeight-35;
+  moveDoor=false;
 }
 
 void draw () {

@@ -38,8 +38,8 @@ void game () {
   if (mode==game) {
   
     //if you get close to the obstacle it starts rising
-    if (dist(ballX, ballY, 400, obstacleHeight)<ballD/2+100) {
-      obstacleHeight=obstacleHeight-2;
+    if (dist(ballX, ballY, 400, obstacleHeight)<ballD/2+50 || ballX>350) {
+      obstacleHeight=obstacleHeight-10;
       if (obstacleHeight<(groundHeight-25)) {
         obstacleHeight=groundHeight-25;//once the obstacle gets to a certain height it stops there
       }
@@ -56,8 +56,7 @@ void game () {
     //if you reach the gap
     if (ballX>610-ballD/2) {//if the ball is past a certain point it will show the gap
       gap=true;
-      if (up==false && ballX>610 && ballX<670)//if the ball is not jumping and it's within the x boundary of gap
-      ballY=ballY+10;//starts to fall
+      if (up==false && ballX>610 && ballX<670) ballY=ballY+10;//if the ball is not jumping and it's within the x boundary of gap, strats to fall
       if (ballY>groundHeight-20) {
         ballX=610+ballD/2;//if it starts falling you can't move past the boundaries of gap-->so you don't get stuck midway down if you move
       }
@@ -71,6 +70,13 @@ void game () {
     //if you reach the door
     if (dist(800+45/2, groundHeight-35, ballX, ballY)<ballD) {//if distance from center of door to center of ball less than diameter of ball
       mode=game2;
+      //sets the coordinates of the door for the next level
+      doorX=800;
+      doorY=310;
+      //sets ball coordinates for next level
+      ballX=50;
+      ballY=525;
+      gap=false;
     }
   }
  
@@ -147,3 +153,5 @@ void respawn () {
     gap=false;//hide the gap again
   }
 }
+
+//make it so that the obstacle height is reset

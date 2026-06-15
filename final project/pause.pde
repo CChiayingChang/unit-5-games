@@ -28,11 +28,19 @@ void pauseClick () {
     else if (progress==3) mode=game3;
   }
   if (mouseX>337 && mouseX<562 && mouseY>400 && mouseY<475) {//if you click on restart
-    if (progress==1) mode=game;
+    if (progress==1) {
+      mode=game;
+      gap=false;
+      ballX=100;
+    }
     else if (progress==2) {
       mode=game2;
-      ballY=platformHeight-25;
+      ballY=525;
       ballX=100;
+      doorX=800;
+      doorY=310;
+      gap=false;
+      moveDoor=false;
     }
     else if (progress==3) mode=game3;
     obstacleHeight=groundHeight+25;

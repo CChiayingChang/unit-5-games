@@ -45,3 +45,5 @@ void pauseClick () {
     click ();
   }
 }
+
+//why does the white border stay?

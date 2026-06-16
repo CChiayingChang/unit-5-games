@@ -22,8 +22,7 @@ void game3 () {
   
   obstacle3 ();//the big obstacle that shows up first
   
-  //the small obstacle that shows up first
-  fill (0, 255, 0);
+  //the small obstacle that shows up second
   rect (obstacleX, obstacleY, 50, 50);
   
   //respawn-----------------------------------------------------------------------------------------------
@@ -115,4 +114,5 @@ void obstacle3 () {
   rect (obstacle3X, obstacle3Y, 75, 500);
 }
 
-//make it so that ur unable to go through the walls
+//make it so that ur unable to go through the walls when in gap
+//make it so that you can't go through the green block

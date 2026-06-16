@@ -1,20 +1,39 @@
 void gameover () {
   background (black);
-  textSize (100);
+  textSize (200);
   text ("YOU WIN!", 450, 350);
   
   println (mouseX, mouseY);
   
   //restart button
+  tactileButton (37, 287, 500, 575);
   rect (37, 500, 250, 75);
+  fill (white);
+  text ("RESTART", 162, 540);
   
   //map button
+  tactileButton (324, 574, 500, 575);
   rect (324, 500, 250, 75);
+  fill (white);
+  text ("MAP", 449, 540);
   
   //exit button
+  tactileButton (613, 863, 500, 575);
   rect (613, 500, 250, 75);
+  fill (white);
+  text ("EXIT", 738, 540);
 }
 
 void gameoverClick () {
-
+  if (mouseX>37 && mouseX<287 && mouseY>500 && mouseY<575) {//if you click on restart
+    mode=intro;
+    level2=false;
+    level3=false;
+  }
+  if (mouseX>324 && mouseX<574 && mouseY>500 && mouseY<575) {
+    mode=map;
+  }
+  if (mouseX>613 && mouseX<863 && mouseY>500 && mouseY<575) {
+    exit ();
+  }
 }

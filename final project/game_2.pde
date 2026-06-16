@@ -183,5 +183,5 @@ void jump () {
 }
 
 
-//make it so that the door wil move when you get to that point and not stop moving as soon as you move out of range
+//get rid of weird jumping effect
 //make it so that you can't move through the platforms

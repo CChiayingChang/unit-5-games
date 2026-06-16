@@ -78,7 +78,7 @@ AudioPlayer click, background, die;
 boolean smallObstacle;//for the 2nd obstacle in level 3
 
 void setup () {
-  mode=gameover;
+  mode=map;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
@@ -175,14 +175,6 @@ void tactileButton (int xl, int xr, int yt, int yb) {
   } else {
     noStroke ();
     textSize (55);
-  }
-}
-
-void tactileMap (int x, int y, int d) {
-  if (dist(x, y, mouseX, mouseY)<d/2) {
-    stroke (white);
-  } else {
-    noStroke ();
   }
 }
 

@@ -30,36 +30,18 @@ void pauseClick () {
   if (mouseX>337 && mouseX<562 && mouseY>400 && mouseY<475) {//if you click on restart
   stopJump=false;
     if (progress==1) {
-      mode=game;
-      gap=false;
-      ballX=100;
+      reset1 ();
     }
     else if (progress==2) {
-      mode=game2;
-      ballY=525;
-      ballX=100;
-      doorX=800;
-      doorY=310;
-      gap=false;
-      moveDoor=false;
+      reset2 ();
     }
     else if (progress==3) {
-      mode=game3;
-      obstacle3Y=500;
-      obstacle3X=615;
-      ballX=100;
-      ballY=475;
-      stopJump=false;
-      obstacle3Timer=0;
+      reset3 ();
     }
-    obstacleHeight=groundHeight+25;
-    gap=false;
-    ballX=100;
+    click ();
   }
   if (mouseX>619 && mouseX<844 && mouseY>400 && mouseY<475) {//if you click on map
     mode=map;
-    obstacleHeight=groundHeight+25;
-    gap=false;
-    ballX=100;
+    click ();
   }
 }

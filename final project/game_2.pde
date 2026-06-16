@@ -27,11 +27,8 @@ void game2 () {
   
   //if you win-----------------------------------------------------------------------
   
-  if (dist(200+45/2, groundHeight-35, ballX, ballY)<ballD && doorX==200) {
-    mode=game3;
-    respawn=false;
-    ballX=100;
-    ballY=475;
+  if (dist(doorX, doorY, ballX, ballY)<ballD && doorX==200) {
+    reset3 ();
   }
   
   //-----------------------------------------------------------------------------
@@ -141,15 +138,7 @@ void game2 () {
     obstacleHeight=groundHeight-25;
   }
   if (timer>50) {//once the timer is up, show the character
-    respawn=false;
-    timer=0;
-    ballX=50;
-    ballY=525;
-    doorX=800;
-    doorY=310;
-    gap=false;//hide the gap again
-    moveDoor=false;
-    stopJump=false;
+    reset2 ();
   }
   
   //gap-------------------------------------------------------------------------------------
@@ -183,6 +172,7 @@ void game2Click () {
     mode=pause;
     fill (black, 150);
     rect (0, 0, width, height);
+    click ();
   }
 }
 

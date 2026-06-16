@@ -68,15 +68,8 @@ void game () {
       }
     
     //if you reach the door
-    if (dist(800+45/2, groundHeight-35, ballX, ballY)<ballD) {//if distance from center of door to center of ball less than diameter of ball
-      mode=game2;
-      //sets the coordinates of the door for the next level
-      doorX=800;
-      doorY=310;
-      //sets ball coordinates for next level
-      ballX=50;
-      ballY=525;
-      gap=false;
+    if (dist(doorX, doorY, ballX, ballY)<ballD) {//if distance from center of door to center of ball less than diameter of ball
+      reset2 ();
     }
   }
  
@@ -103,6 +96,7 @@ void gameClick () {
     mode=pause;
     fill (black, 150);
     rect (0, 0, width, height);
+    click ();
   }
 }
 
@@ -146,13 +140,7 @@ void respawn () {
     obstacleHeight=groundHeight-25;
   }
   if (timer>50) {//once the timer is up, show the character
-    respawn=false;
-    timer=0;
-    ballX=100;
-    //resets the obstacle height
-    obstacleHeight=groundHeight+25;
-    gap=false;//hide the gap again
-    stopJump=false;
+    reset1 ();
   }
 }
 

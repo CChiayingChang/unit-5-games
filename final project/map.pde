@@ -24,35 +24,20 @@ void map () {
 
 void mapClick () {
   if (dist(mouseX, mouseY, 130, 415)<50) {//if you click on level 1
-   mode=game;
-   ballX=100;
-   //resets the obstacle height
-   obstacleHeight=575;
-   gap=false;//hide the gap again
-   groundHeight=550;
-   doorX=800;
-   doorY=groundHeight-35;
+   reset1 ();
+   click ();
   }
   if (dist(mouseX, mouseY, 435, 250)<50 && level2==true) {//if you click on level 2
-    mode=game2;
-    ballX=50;
-    ballY=525;
-    doorX=800;
-    doorY=310;
-    gap=false;
-    moveDoor=false;
+    reset2 ();
+    click ();
   }
   if (dist(mouseX, mouseY, 725, 375)<50 && level3==true) {//if you click on level 3
-    mode=game3;
-    ballX=100;
-    ballY=475;
-    obstacle3X=615;
-    obstacle3Y=500;
-    obstacle3Timer=0;
-    stopJump=false;
+    reset3 ();
+    click ();
   }
   if (mouseX>45 && mouseX<145 && mouseY>600 && mouseY<650) {
     mode=intro;
+    click ();
   }
 }
 

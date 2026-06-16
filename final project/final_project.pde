@@ -1,4 +1,10 @@
 //level devil inspired
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
 
 int mode;//keeps track of what screen youre on
 //the different variables for each screen
@@ -37,7 +43,10 @@ color brown=#90621C;
 color blue=#2ADAF7;
 color grey=#AAAAAA;
 
-int obstacleHeight;
+int obstacleHeight;//for the obstacle in level 1
+
+int obstacleX;//for the small osbtacle in level 3
+int obstacleY;//for the small obstacle in level 3
 
 boolean gap;//if you pass the gap, this=true. when this is true, show the gap-->this way it doesn't disappear when you move back before the gap
 
@@ -62,8 +71,14 @@ boolean moveobstacle3;
 
 boolean stopJump;//prevents you from being able to jump if you're in a gap
 
+//sound effects
+Minim sounds;
+AudioPlayer click, background, die;
+
+boolean smallObstacle;//for the 2nd obstacle in level 3
+
 void setup () {
-  mode=game3;
+  mode=gameover;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
@@ -111,6 +126,15 @@ void setup () {
   obstacle3Timer=0;
   
   stopJump=false;
+  
+  //sound effects
+  sounds=new Minim (this);
+  click=sounds.loadFile ("click.mp3");
+  
+  obstacleX=150;
+  obstacleY=500;
+  
+  smallObstacle=false;
 }
 
 void draw () {
@@ -170,4 +194,56 @@ void menu () {
   line (845, 35, 875, 35);
   line (845, 45, 875, 45);
   noStroke ();
+}
+
+void click () {
+  click.rewind ();
+  click.play ();
+}
+
+void reset1 () {
+  mode=game;
+  ballX=100;
+  //resets the obstacle height
+  obstacleHeight=575;
+  gap=false;//hide the gap again
+  groundHeight=550;
+  doorX=800;
+  doorY=groundHeight-35;
+  respawn=false;
+  timer=0;
+  stopJump=false;
+}
+
+void reset2 () {
+  mode=game2;
+  //sets the coordinates of the door for the next level
+  doorX=800;
+  doorY=310;
+  //sets ball coordinates for next level
+  ballX=50;
+  ballY=525;
+  gap=false;
+  respawn=false;
+  timer=0;
+  moveDoor=false;
+  stopJump=false;
+}
+
+void reset3 () {
+  mode=game3;
+  respawn=false;
+  ballX=100;
+  ballY=475;
+  smallObstacle=false;
+  obstacle3X=615;
+  obstacle3Y=500;
+  obstacle3Timer=0;
+  smallObstacle=false;
+  gap=false;
+  timer=0;
+  moveobstacle3=false;
+  stopJump=false;
+  obstacleY=500;
+  obstacleX=150;
 }

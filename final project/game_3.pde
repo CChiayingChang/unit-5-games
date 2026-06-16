@@ -20,7 +20,11 @@ void game3 () {
   
   println (mouseX, mouseY);
   
-  obstacle3 ();
+  obstacle3 ();//the big obstacle that shows up first
+  
+  //the small obstacle that shows up first
+  fill (0, 255, 0);
+  rect (obstacleX, obstacleY, 50, 50);
   
   //respawn-----------------------------------------------------------------------------------------------
  //pauses before it respawns the character
@@ -35,17 +39,7 @@ void game3 () {
     
   }
   if (timer>50) {//once the timer is up, show the character
-    respawn=false;
-    timer=0;
-    ballX=100;
-    ballY=475;
-    gap=false;//hide the gap again
-    moveDoor=false;
-    obstacle3X=615;
-    moveobstacle3=false;
-    stopJump=false;
-    obstacle3Timer=0;
-    obstacle3Y=500;
+    reset3 ();
   }
   
   movement ();
@@ -73,16 +67,37 @@ void game3 () {
   }
   
   if (obstacle3X<=500) obstacle3Timer=obstacle3Timer+1;
-  if (obstacle3Timer>200 && obstacle3Y<1500) {
+  if (obstacle3Timer>100 && obstacle3Y<1000) {//makes the big obstacle pause, then disappear
     obstacle3Y=obstacle3Y+10;
+    obstacle3X=900;//so the ball won't get stuck when trying to jump past--otherwise can't make it past
   }
-  if (obstacle3Timer>1500) {
-    obstacle3Timer=0;
-    obstacle3X=900;
-    println (obstacle3X);
+  if (obstacle3Timer>1000) {
+    obstacle3Timer=0;//reset timer
   }
   
-  //--------------------------------------------------------------------
+  if (obstacle3X==500 && ballX<400) {//if you make it past first obstacle, second one will push you in
+    smallObstacle=true;
+  }
+  if (smallObstacle==true) {
+    obstacleY=obstacleY-5;
+    if (obstacleY<450) obstacleY=450;
+    obstacleX=obstacleX+7;
+    if (obstacleX>350) obstacleX=350;
+  }
+  if (obstacleX==350 && ballX<obstacleX-ballD/2) {
+    smallObstacle=false;
+    obstacleY=obstacleY+5;//the small obstacle disappears
+  }
+  
+  //the ball gets pushed by the obstacle/can't go through the obstacle
+  if (ballY>obstacleY && ballX<obstacleX+50+ballD/2 && ballX>obstacleX) ballX=obstacleX+50+ballD/2;
+  if (obstacleX==350 && ballX==400+ballD/2 && ballY>obstacleY) ballX=450;//if you fall in the gap you can't move sideways
+  
+  //if you reach the door--------------------------------------------------------------------
+  if (dist(ballX, ballY, doorX, doorY)<ballD) {
+    mode=gameover;
+  }
+  
 }
 
 void game3Click () {
@@ -90,6 +105,7 @@ void game3Click () {
     mode=pause;
     fill (black, 150);
     rect (0, 0, width, height);
+    click ();
   }
 }
 
@@ -99,4 +115,4 @@ void obstacle3 () {
   rect (obstacle3X, obstacle3Y, 75, 500);
 }
 
-//make it so that if you get pushed by the obstacle and fall in the gap, ur unable to go through the walls
+//make it so that ur unable to go through the walls

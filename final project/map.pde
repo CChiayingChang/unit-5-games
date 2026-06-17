@@ -5,17 +5,17 @@ void map () {
   tactileMap (130, 415, 100, level1);
   level (level1, 130, 415, 100);
   fill (white);
-  text ("1", 130, 415);
+  text ("1", 133, 418);
   
   tactileMap (435, 250, 100, level2);
   level (level2, 435, 250, 100);
   fill (white);
-  text ("2", 435, 250);
+  text ("2", 438, 253);
   
   tactileMap (725, 375, 100, level3);
   level (level3, 725, 375, 100);
   fill (white);
-  text ("3", 725, 375);
+  text ("3", 728, 378);
   println (mouseX, mouseY);
   
   //back button

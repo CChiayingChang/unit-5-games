@@ -29,6 +29,7 @@ void game2 () {
   
   if (dist(doorX, doorY, ballX, ballY)<ballD && doorX==200) {
     reset3 ();
+    door ();
   }
   
   //-----------------------------------------------------------------------------
@@ -44,7 +45,7 @@ void game2 () {
   rect (200, 490, 100, 50);
   if (ballX>200 && ballX<300) platformHeight=490;
   
-  rect (400, 430, 100, 50);
+  rect (400, obstacleHeight, 100, 50);//this is the obstacle that will crush you
   if (ballX>400 && ballX<500) platformHeight=430;
   
   rect (600, 370, 100, 50);
@@ -73,7 +74,6 @@ void game2 () {
       if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
       else if (jumpTimer>10 && jumpTimer<20) {
         ballY=ballY+15;
-        jumpTimer=0;
       } else if (jumpTimer==20) {
          ballY=groundHeight-ballD/2;
          jumpTimer=0;
@@ -81,7 +81,6 @@ void game2 () {
         ballY=ballY+15;
         if (ballY>groundHeight-ballD/2) ballY=groundHeight-ballD/2;
       }
-      println ("under");
     } else  if (ballY<platformHeight){//if you're on top of the platform
       if (up==true) jumpTimer=jumpTimer+1;
       if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
@@ -92,13 +91,11 @@ void game2 () {
         jumpTimer=0;
         up=false;
       }
-      println ("over");
     } else {
         up=false;
         jumpTimer=0;
           ballY=ballY+15;
           if (ballY>groundHeight-ballD/2) ballY=groundHeight-ballD/2;
-        println ("between");
     }
  }
   
@@ -118,11 +115,6 @@ void game2 () {
     }
     if (ballY>groundHeight-25) ballY=groundHeight-25;
   }
-  
-  ////prevents the ball from getting between the platform
-  //if (ballY>platformHeight-ballD/2 && ballY<platformHeight+50+ballD/2 && ballX<100+ballD/2) {//if the ballY is in middle of platform
-  //   ballX=100+ballD/2;
-  //}
 
  //respawn-----------------------------------------------------------------------------------------------
  //pauses before it respawns the character
@@ -134,11 +126,11 @@ void game2 () {
     fill (red);
     textSize (150);
     text ("SIKE!", 450, 350);
-    
-    obstacleHeight=groundHeight-25;
+    die ();
   }
   if (timer>50) {//once the timer is up, show the character
     reset2 ();
+    deaths=deaths+1;
   }
   
   //gap-------------------------------------------------------------------------------------
@@ -158,12 +150,22 @@ void game2 () {
         rect (250, groundHeight, 60, 50);
     }
  
+ //the obstacle that will crush you------------------------------------------------------------------------
+
+  if (doorX==200 && ballX<500+ballD/2) {
+    crush=true;
+  }
+  if (crush==true) crushTimer=crushTimer+1;
+  if (crushTimer>5) obstacleHeight=obstacleHeight+20;
+  if (obstacleHeight>groundHeight-50) obstacleHeight=groundHeight-50;//the platform wil not sink below ground level
+  if (obstacleHeight==groundHeight-50 && up==false && ballX<525 && ballX>510) ballX=525;//can't go through pplatform from right side
+  if (obstacleHeight==groundHeight-50 && up==false && ballX>375 && ballX<400) ballX=375;//can't go trhough platform from left
+  if (ballX>=400 && ballX<=510 && up==false && ballY>560 && obstacleHeight==groundHeight-50) ballY=560;//you can jump on top of the platform
+
+  println (mouseX, mouseY);
+//------------------------------
  
 }
-
-
-  
-//------------------------------------------------------------------------
 
 
 
@@ -185,3 +187,4 @@ void jump () {
 
 //get rid of weird jumping effect
 //make it so that you can't move through the platforms
+//fix it so that if you're jumping on top of the platform your jump height is not restricted by the previous platform height

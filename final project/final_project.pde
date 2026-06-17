@@ -27,14 +27,6 @@ boolean up;//if up=true, jump; else, don't jump
 boolean right;
 boolean left;
 
-boolean respawn;//when respawn=false, show character; when respawn=true, don't show character-->gives pause after death
-int timer;//timer for when you die-->when you die respawn=true and timer starts, when timer is up respawn=false
-
-int groundHeight;
-int platformHeight;
-
-int jumpTimer;//timing for the jumping-->rising, falling
-
 //colour palette
 color red=#EA0014;
 color black=#000000;
@@ -43,10 +35,11 @@ color brown=#90621C;
 color blue=#2ADAF7;
 color grey=#AAAAAA;
 
-int obstacleHeight;//for the obstacle in level 1
+boolean respawn;//when respawn=false, show character; when respawn=true, don't show character-->gives pause after death
+int timer;//timer for when you die-->when you die respawn=true and timer starts, when timer is up respawn=false
 
-int obstacleX;//for the small osbtacle in level 3
-int obstacleY;//for the small obstacle in level 3
+int groundHeight;
+int jumpTimer;//timing for the jumping-->rising, falling
 
 boolean gap;//if you pass the gap, this=true. when this is true, show the gap-->this way it doesn't disappear when you move back before the gap
 
@@ -61,24 +54,37 @@ int progress;//for keeping track of what level to go to in pause
 
 PFont font;
 
-boolean moveDoor;
-
-int obstacle3X;//for the x coordiante of the obstacle in level 3
-int obstacle3Y;//for the y value of the obstacle in level 3
-int obstacle3Timer;//to make the obstacle pause before it disappears
-
-boolean moveobstacle3;
-
 boolean stopJump;//prevents you from being able to jump if you're in a gap
 
 //sound effects
 Minim sounds;
-AudioPlayer click, background, die;
+AudioPlayer click, background, die, door;
+PImage trophy;//background for gameover
 
+int deaths;//to count how many times you died in the game
+
+
+//level 1 variables----------------------------------------------------------------------------
+int platformHeight;
+int obstacleHeight;//for the obstacle in level 1 and 2
+
+int obstacleX;//for the small osbtacle in level 3
+int obstacleY;//for the small obstacle in level 3
+
+//level 2 variables----------------------------------------------------------------------------
+boolean moveDoor;
+int crushTimer;//for the timer for the platform that crushes you
+boolean crush;//will determine if platform should crush you or not
+
+//level 3 variables--------------------------------------------
+int obstacle3X;//for the x coordiante of the obstacle in level 3
+int obstacle3Y;//for the y value of the obstacle in level 3
+int obstacle3Timer;//to make the obstacle pause before it disappears
+boolean moveobstacle3;//for movign the big obstacle in level 3
 boolean smallObstacle;//for the 2nd obstacle in level 3
 
 void setup () {
-  mode=map;
+  mode=game2;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
@@ -91,19 +97,16 @@ void setup () {
   right=false;
   left=false;
   
-  groundHeight=550;
-  platformHeight=550;//for the floating platforms
   jumpTimer=0;//for the timing of up and down for jumping
   
   ballX=100;
   ballY=groundHeight-25;
   ballD=50;
   
+  //respawn variables
   timer=0;//when you die times the character's reappearance
   respawn=false;
-  
-  obstacleHeight=(groundHeight+25);
-  
+
   gap=false;
   
   //for the colours of the levels on the map
@@ -117,24 +120,37 @@ void setup () {
   
   doorX=800;
   doorY=groundHeight-35;
-  moveDoor=false;
-  
-  //the obstacle in level 3
-  obstacle3X=615;
-  obstacle3Y=500;
-  moveobstacle3=false;
-  obstacle3Timer=0;
   
   stopJump=false;
   
   //sound effects
   sounds=new Minim (this);
   click=sounds.loadFile ("click.mp3");
+  door=sounds.loadFile ("door.mp3");
+  die=sounds.loadFile ("die.mp3");
   
+  trophy=loadImage ("trophy.jpg");
+  deaths=0;
+  
+  //level 1 variables---------------------------------
+  groundHeight=550;
+  obstacleHeight=(groundHeight+25);
+  
+  //level 2 variables--------------------------------
+  platformHeight=550;//for the floating platforms
+  moveDoor=false;
+  crushTimer=0;
+  crush=false;
+  
+  //level 3 variables-------------------------------------------
+  //the big obstacle in level 3
+  obstacle3X=615;
+  obstacle3Y=500;
+  moveobstacle3=false;
+  obstacle3Timer=0;
+  smallObstacle=false;
   obstacleX=150;
   obstacleY=500;
-  
-  smallObstacle=false;
 }
 
 void draw () {
@@ -169,7 +185,7 @@ void door (int x, int y) {
 void tactileButton (int xl, int xr, int yt, int yb) {
   fill (red);
   strokeWeight (3);
-  if (mouseX>xl && mouseX<xr && mouseY>yt && mouseY<yb) {
+  if (mouseX>xl-5 && mouseX<xr+5 && mouseY>yt-5 && mouseY<yb+5) {
     stroke (white);
     textSize (60);
   } else {
@@ -180,7 +196,7 @@ void tactileButton (int xl, int xr, int yt, int yb) {
 
 void menu () {
   stroke (white);
-  if (mouseX>845 && mouseX<875 && mouseY>25 && mouseY<45) strokeWeight (4); //makes it tactile
+  if (mouseX>845-5 && mouseX<875+5 && mouseY>25-5 && mouseY<45+5) strokeWeight (4); //makes it tactile
   else strokeWeight (2);
   line (845, 25, 875, 25);
   line (845, 35, 875, 35);
@@ -191,6 +207,16 @@ void menu () {
 void click () {
   click.rewind ();
   click.play ();
+}
+
+void door () {
+  door.rewind ();
+  door.play ();
+}
+
+void die () {
+  die.rewind ();
+  die.play ();
 }
 
 void reset1 () {
@@ -220,6 +246,10 @@ void reset2 () {
   timer=0;
   moveDoor=false;
   stopJump=false;
+  obstacleHeight=430;
+  crushTimer=0;
+  groundHeight=650;
+  crush=false;
 }
 
 void reset3 () {

@@ -70,6 +70,7 @@ void game () {
     //if you reach the door
     if (dist(doorX, doorY, ballX, ballY)<ballD) {//if distance from center of door to center of ball less than diameter of ball
       reset2 ();
+      door ();
     }
   }
  
@@ -136,11 +137,12 @@ void respawn () {
     fill (red);
     textSize (150);
     text ("SIKE!", 450, 350);
-    
+    die ();
     obstacleHeight=groundHeight-25;
   }
   if (timer>50) {//once the timer is up, show the character
     reset1 ();
+    deaths=deaths+1;
   }
 }
 

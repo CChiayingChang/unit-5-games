@@ -1,6 +1,9 @@
 void gameover () {
-  background (black);
+  image (trophy, 0, 0, width, height);
+  fill (0, 150);
+  rect (0, 0, width, height);
   textSize (200);
+  fill (white);
   text ("YOU WIN!", 450, 350);
   
   println (mouseX, mouseY);
@@ -22,6 +25,9 @@ void gameover () {
   rect (613, 500, 250, 75);
   fill (white);
   text ("EXIT", 738, 540);
+  
+  textSize (55);
+  text ("Deaths:"+deaths, 450, 625);
 }
 
 void gameoverClick () {
@@ -29,6 +35,7 @@ void gameoverClick () {
     mode=intro;
     level2=false;
     level3=false;
+    deaths=0;
   }
   if (mouseX>324 && mouseX<574 && mouseY>500 && mouseY<575) {
     mode=map;

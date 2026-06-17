@@ -35,10 +35,12 @@ void game3 () {
     fill (red);
     textSize (150);
     text ("SIKE!", 450, 350);
-    
+    die ();
   }
   if (timer>50) {//once the timer is up, show the character
     reset3 ();
+    deaths=deaths+1;
+    
   }
   
   movement ();
@@ -95,6 +97,7 @@ void game3 () {
   //if you reach the door--------------------------------------------------------------------
   if (dist(ballX, ballY, doorX, doorY)<ballD) {
     mode=gameover;
+    door ();
   }
   
 }

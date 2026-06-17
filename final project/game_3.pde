@@ -55,6 +55,10 @@ void game3 () {
   }
   if (ballY>height) respawn=true;
   
+  //can't go into the wall if you fall into the gap
+  if (ballY>groundHeight-25 && ballX<425) ballX=425;
+  if (ballY>groundHeight-25 && ballX>475) ballX=475;
+  
   //if you get close to the obstacle-------------------------------------------------------------
   if (ballX>obstacle3X-ballD/2) {//if you're touching the obstacle
     ballX=obstacle3X-ballD/2;//the ball can't go past the obstacle

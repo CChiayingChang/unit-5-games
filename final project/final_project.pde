@@ -58,7 +58,7 @@ boolean stopJump;//prevents you from being able to jump if you're in a gap
 
 //sound effects
 Minim sounds;
-AudioPlayer click, background, die, door;
+AudioPlayer click, background, die, door, win;
 PImage trophy;//background for gameover
 
 int deaths;//to count how many times you died in the game
@@ -128,6 +128,7 @@ void setup () {
   click=sounds.loadFile ("click.mp3");
   door=sounds.loadFile ("door.mp3");
   die=sounds.loadFile ("die.mp3");
+  win=sounds.loadFile ("win.mp3");
   
   trophy=loadImage ("trophy.jpg");
   deaths=0;

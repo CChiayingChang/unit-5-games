@@ -123,3 +123,5 @@ void obstacle3 () {
 
 //make it so that ur unable to go through the walls when in gap
 //make it so that you can't go through the green block
+//fix glitch when you try to jump ove the gap after first obstacle appears
+//fix the pause that happens when you jump in a gap

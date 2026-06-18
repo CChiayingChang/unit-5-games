@@ -42,8 +42,8 @@ void game2 () {
   rect (0, 550, 90, 50);
   if (ballX>0 && ballX<100) platformHeight=550;
   
-  rect (200, 490, 100, 50);
-  if (ballX>200 && ballX<300) platformHeight=490;
+  rect (200, 480, 100, 50);
+  if (ballX>200 && ballX<300) platformHeight=480;
   
   rect (400, obstacleHeight, 100, 50);//this is the obstacle that will crush you
   if (ballX>400 && ballX<500) platformHeight=430;
@@ -77,10 +77,12 @@ void game2 () {
       } else if (jumpTimer==20) {
          ballY=groundHeight-ballD/2;
          jumpTimer=0;
+         up=false;
       } else {//if you hit the platform you start to move down
         ballY=ballY+15;
         if (ballY>groundHeight-ballD/2) ballY=groundHeight-ballD/2;
         jumpTimer=0;
+        up=false;
       }
     } else  if (ballY<platformHeight){//if you're on top of the platform
       if (up==true) jumpTimer=jumpTimer+1;
@@ -166,12 +168,12 @@ void game2 () {
   }
   if (crush==true) crushTimer=crushTimer+1;
   if (crushTimer>5) obstacleHeight=obstacleHeight+20;
-  if (crush==true && ballX<500 && ballX>400 && ballY>360 && ballY>obstacleHeight && obstacleHeight>groundHeight-ballD-50) respawn =true;//you die if it crushes you
+  if (crush==true && ballX<512 && ballX>388 && ballY>360 && ballY>obstacleHeight && obstacleHeight>groundHeight-ballD-50 && obstacleHeight<groundHeight-50) respawn =true;//you die if it crushes you
   if (obstacleHeight>groundHeight-50) obstacleHeight=groundHeight-50;//the platform wil not sink below ground level
-  if (obstacleHeight==groundHeight-50 && up==false && ballX<525 && ballX>510) ballX=525;//can't go through pplatform from right side
-  if (obstacleHeight==groundHeight-50 && up==false && ballX>375 && ballX<390) ballX=375;//can't go trhough platform from left
-  if (ballX>=400 && ballX<=510 && up==false && ballY>560 && obstacleHeight==groundHeight-50) ballY=560;//you can jump on top of the platform
-  println (ballX);
+  if (obstacleHeight==groundHeight-50 && ballY>obstacleHeight-ballD/2 && ballX<=525 && ballX>=500) ballX=525;//can't go through pplatform from right side
+  if (obstacleHeight==groundHeight-50 && ballY>obstacleHeight-ballD/2 && ballX>=375 && ballX<=400) ballX=375;//can't go trhough platform from left
+  if (ballX+25>400 && ballX-25<500 && ballY>561 && obstacleHeight==groundHeight-50) ballY=561;//you can jump on top of the platform
+  println (ballY);
 
   println (mouseX, mouseY);
 //------------------------------
@@ -195,8 +197,6 @@ void jump () {
   else if (jumpTimer>10 && jumpTimer<20) ballY=ballY+15;
 }
 
-
-//get rid of weird jumping effect
 //make it so that you can't move through the platforms
 //fix it so that if you're jumping on top of the platform your jump height is not restricted by the previous platform height
-//when its under the last platform and you jump you jump continuously-->fix
+//make it so its easier to jump over the gap

@@ -31,6 +31,7 @@ void intro () {
 void introClick () {
   if (mouseX>130 && mouseX<380 && mouseY>500 && mouseY<600) {//if you click on start button
     reset1 ();
+    click ();
   }
   if (mouseX>520 && mouseX<770 && mouseY>500 && mouseY<600) {//if you click on options button
     mode=map;

@@ -1,4 +1,6 @@
 void gameover () {
+  win.play ();
+  
   image (trophy, 0, 0, width, height);
   fill (0, 150);
   rect (0, 0, width, height);
@@ -36,11 +38,16 @@ void gameoverClick () {
     level2=false;
     level3=false;
     deaths=0;
+    win.rewind ();
+    click ();
   }
   if (mouseX>324 && mouseX<574 && mouseY>500 && mouseY<575) {
     mode=map;
+    win.rewind ();
+    click ();
   }
   if (mouseX>613 && mouseX<863 && mouseY>500 && mouseY<575) {
     exit ();
+    click ();
   }
 }

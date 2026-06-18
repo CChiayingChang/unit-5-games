@@ -1,5 +1,6 @@
 void intro () {
   background (0);
+  background.play ();
   
   fill (red);
   textSize (220);

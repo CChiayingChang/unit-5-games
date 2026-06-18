@@ -1,4 +1,5 @@
 void gameover () {
+  background.pause ();
   win.play ();
   
   image (trophy, 0, 0, width, height);

@@ -84,7 +84,7 @@ boolean moveobstacle3;//for movign the big obstacle in level 3
 boolean smallObstacle;//for the 2nd obstacle in level 3
 
 void setup () {
-  mode=game2;
+  mode=game3;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
@@ -129,6 +129,7 @@ void setup () {
   door=sounds.loadFile ("door.mp3");
   die=sounds.loadFile ("die.mp3");
   win=sounds.loadFile ("win.mp3");
+  background=sounds.loadFile ("background.mp3");
   
   trophy=loadImage ("trophy.jpg");
   deaths=0;

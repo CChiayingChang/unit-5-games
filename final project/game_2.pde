@@ -70,7 +70,9 @@ void game2 () {
   if ((ballX>=0 && ballX<=112) || (ballX>=188 && ballX<=312) || (ballX>=388 && ballX<=512) || (ballX>=588 && ballX<=712)) {//if ur in x range of the platforms
   //must have <= in either on platform or in between, otherwise ball can get stuck in the middle of the platform
     if (ballY>platformHeight+50+ballD/2) {//if you're under the platform
-      if (up==true) jumpTimer=jumpTimer+1;
+      if (up==true) {
+        jumpTimer=jumpTimer+1;
+      }
       if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
       else if (jumpTimer>10 && jumpTimer<20) {
         ballY=ballY+15;
@@ -85,7 +87,9 @@ void game2 () {
         up=false;
       }
     } else  if (ballY<platformHeight){//if you're on top of the platform
-      if (up==true) jumpTimer=jumpTimer+1;
+      if (up==true) {
+        jumpTimer=jumpTimer+1;
+      }
       if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
       else if (jumpTimer>10 && jumpTimer<20 && ballY+ballD/2<platformHeight) ballY=ballY+15;
       else if (jumpTimer>10 && jumpTimer<20 && ballY+ballD/2>=platformHeight) ballY=platformHeight-ballD/2;
@@ -118,6 +122,8 @@ void game2 () {
     }
     if (ballY>groundHeight-25) ballY=groundHeight-25;
   }
+  
+  println (ballX);
   
   //can't go through the platforms from the side-------------------------------------------------------
   
@@ -163,11 +169,11 @@ void game2 () {
  
  //the obstacle that will crush you------------------------------------------------------------------------
 
-  if (doorX==200 && ballX<500+ballD/2) {
+  if (doorX==200 && ballX<500) {
     crush=true;
   }
   if (crush==true) crushTimer=crushTimer+1;
-  if (crushTimer>5) obstacleHeight=obstacleHeight+20;
+  if (crushTimer>3) obstacleHeight=obstacleHeight+20;
   if (crush==true && ballX<512 && ballX>388 && ballY>360 && ballY>obstacleHeight && obstacleHeight>groundHeight-ballD-50 && obstacleHeight<groundHeight-50) respawn =true;//you die if it crushes you
   if (obstacleHeight>groundHeight-50) obstacleHeight=groundHeight-50;//the platform wil not sink below ground level
   if (obstacleHeight==groundHeight-50 && ballY>obstacleHeight-ballD/2 && ballX<=525 && ballX>=500) ballX=525;//can't go through pplatform from right side
@@ -192,7 +198,9 @@ void game2Click () {
 }
 
 void jump () {
-  if (up==true) jumpTimer=jumpTimer+1;
+  if (up==true) {
+    jumpTimer=jumpTimer+1;
+  }
   if (jumpTimer>0 && jumpTimer<=10) ballY=ballY-15;
   else if (jumpTimer>10 && jumpTimer<20) ballY=ballY+15;
 }

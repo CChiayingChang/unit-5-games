@@ -242,7 +242,7 @@ void reset2 () {
   doorY=310;
   //sets ball coordinates for next level
   ballX=50;
-  ballY=525;
+  ballY=535;
   gap=false;
   respawn=false;
   timer=0;

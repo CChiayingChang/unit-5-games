@@ -4,18 +4,27 @@ void pause () {
   textSize (200);
   text ("PAUSED", 450, 250);
   
+  noStroke ();
+  fill (139, 13, 13);
+  rect (66, 410, 225, 75);
   noBorder (54, 398, 229, 79);//so when you hover over the button it doens't leave behind a white border
   tactileButton (56, 281, 400, 475);
   rect (56, 400, 225, 75);//resume button
   fill (white);
   text ("RESUME", 169, 438);
   
+  noStroke ();
+  fill (139, 13, 13);
+  rect (347, 410, 225, 75);
   noBorder (335, 398, 229, 79);
   tactileButton (337, 562, 400, 475);
   rect (337, 400, 225, 75);//restart button
   fill (white);
   text ("RESTART", 450, 438);
   
+  noStroke ();
+  fill (139, 13, 13);
+  rect (629, 410, 225, 75);
   noBorder (617, 398, 229, 79);
   tactileButton (619, 844, 400, 475);
   rect (619, 400, 225, 75);//map button

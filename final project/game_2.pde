@@ -39,15 +39,19 @@ void game2 () {
   rect (0, 650, width, 50);//ground
   
   //platforms
-  rect (0, 550, 90, 50);
-  if (ballX>0 && ballX<100) platformHeight=550;
+  fill (white);
+  rect (0, 560, 100, 50);
+  if (ballX>0 && ballX<100) platformHeight=560;
   
   rect (200, 480, 100, 50);
   if (ballX>200 && ballX<300) platformHeight=480;
   
+  if (crush==true) fill (red);
+  else fill (white);
   rect (400, obstacleHeight, 100, 50);//this is the obstacle that will crush you
   if (ballX>400 && ballX<500) platformHeight=430;
   
+  fill (white);
   rect (600, 370, 100, 50);
   if (ballX>600 && ballX<700) platformHeight=370;
   
@@ -67,7 +71,7 @@ void game2 () {
   if (right==true) ballX=ballX+10;
   if (left==true) ballX=ballX-10;
   
-  if ((ballX>=0 && ballX<=112) || (ballX>=188 && ballX<=312) || (ballX>=388 && ballX<=512) || (ballX>=588 && ballX<=712)) {//if ur in x range of the platforms
+  if ((ballX>=0 && ballX<=125) || (ballX>=175 && ballX<=325) || (ballX>=375 && ballX<=525) || (ballX>=575 && ballX<=725)) {//if ur in x range of the platforms
   //must have <= in either on platform or in between, otherwise ball can get stuck in the middle of the platform
     if (ballY>platformHeight+50+ballD/2) {//if you're under the platform
       if (up==true) {
@@ -106,7 +110,7 @@ void game2 () {
     }
  }
   
-  if ((ballX>112 && ballX<188) || (ballX>312 && ballX<388) || (ballX>512 && ballX<588) || ballX>712) {//if you're between the platforms (x)
+  if ((ballX>125 && ballX<175) || (ballX>325 && ballX<375) || (ballX>525 && ballX<575) || ballX>725) {//if you're between the platforms (x)
    jump ();
    if (jumpTimer==20) {
       ballY=groundHeight-25;
@@ -127,10 +131,20 @@ void game2 () {
   
   //can't go through the platforms from the side-------------------------------------------------------
   
-  if (ballX<125 && ballX>105 && ballY>525 && ballY<625) ballX=100+ballD/2;
- 
+  if (ballX<100 && ballY>580) ballX=112;
   
+  //if (ballX>175 && ballX<325 && ballY>480 && ballY<530) ballX=175;
+  //if (ballX>175 && ballX<=325 && ballY>480 && ballY<530) ballX=325;
+  ////rect (200, 480, 100, 50);
+  ////if (ballX>200 && ballX<300) platformHeight=480;
   
+  //if (ballX>375 && ballX<525 && ballY>430 && ballY<480) ballX=375;
+  //if (ballX>372 && ballX<=525 && ballY>430 && ballY<480) ballX=525;
+  //rect (400, obstacleHeight, 100, 50);//this is the obstacle that will crush you
+  //if (ballX>400 && ballX<500) platformHeight=430;
+  
+  //rect (600, 370, 100, 50);
+  //if (ballX>600 && ballX<700) platformHeight=370;
   
 
  //respawn-----------------------------------------------------------------------------------------------
@@ -168,14 +182,16 @@ void game2 () {
     }
  
  //the obstacle that will crush you------------------------------------------------------------------------
-
-  if (doorX==200 && ballX<500) {
+  if (doorX==200 && ballX<525) {
     crush=true;
   }
   if (crush==true) crushTimer=crushTimer+1;
-  if (crushTimer>3) obstacleHeight=obstacleHeight+20;
+  if (crushTimer>3) obstacleHeight=obstacleHeight+30;
   if (crush==true && ballX<512 && ballX>388 && ballY>360 && ballY>obstacleHeight && obstacleHeight>groundHeight-ballD-50 && obstacleHeight<groundHeight-50) respawn =true;//you die if it crushes you
-  if (obstacleHeight>groundHeight-50) obstacleHeight=groundHeight-50;//the platform wil not sink below ground level
+  if (obstacleHeight>groundHeight-50) {
+    obstacleHeight=groundHeight-50;//the platform wil not sink below ground level
+    crush=false;
+  }
   if (obstacleHeight==groundHeight-50 && ballY>obstacleHeight-ballD/2 && ballX<=525 && ballX>=500) ballX=525;//can't go through pplatform from right side
   if (obstacleHeight==groundHeight-50 && ballY>obstacleHeight-ballD/2 && ballX>=375 && ballX<=400) ballX=375;//can't go trhough platform from left
   if (ballX+25>400 && ballX-25<500 && ballY>561 && obstacleHeight==groundHeight-50) ballY=561;//you can jump on top of the platform

@@ -19,10 +19,12 @@ void game () {
   obstacle (400, obstacleHeight, 50, 50);
   
   rectMode (CORNER);
+  fill (white);
   rect (0, groundHeight, width, 50);//ground
   
   //spikes
   for (int x=0; x<=900; x+=25) {
+    fill (red);
     triangle (x, 700, x+25, 700, x+12.5, 650);
   }
   
@@ -84,6 +86,7 @@ void game () {
 
 void obstacle (int x, int y, int w, int h) {
   rectMode (CENTER);
+  fill (red);
   rect (x, y, w, h);
   if (dist(ballX, ballY, x, y)<ballD/2+w/2) {//if you hit the obstacle
     ballX=100;

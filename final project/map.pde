@@ -19,6 +19,9 @@ void map () {
   println (mouseX, mouseY);
   
   //back button
+  noStroke ();
+  fill (139, 13, 13);
+  rect (55, 610, 100, 50);
   tactileButton (45, 145, 600, 650);
   rect (45, 600, 100, 50);
   fill (white);
@@ -26,6 +29,9 @@ void map () {
   rect (80, 620, 50, 10);
   
   //exit button
+  noStroke ();
+  fill (139, 13, 13);
+  rect (765, 610, 100, 50);
   tactileButton (755, 855, 600, 650);
   rect (755, 600, 100, 50);
   fill (white);

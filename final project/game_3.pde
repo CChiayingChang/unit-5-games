@@ -46,7 +46,7 @@ void game3 () {
   movement ();
   
   //gap-----------------------------------------------------------------------------------------
-  if (ballX>438 && ballX<488 && up==false) {//if it falls into the gap
+  if (ballX>412 && ballX<488 && up==false) {//if it falls into the gap
     up=false;
     gap=true;//why only work if gap=true?????
     ballY=ballY+15;
@@ -80,7 +80,7 @@ void game3 () {
     obstacle3Timer=0;//reset timer
   }
   
-  if (obstacle3X==500 && ballX<400) {//if you make it past first obstacle, second one will push you in
+  if ((obstacle3X==500 && ballX<390) || (obstacle3X==900 && ballX<390)) {//if you make it past first obstacle, second one will push you in
     smallObstacle=true;
   }
   if (smallObstacle==true) {
@@ -123,6 +123,5 @@ void obstacle3 () {
 }
 
 //make it so that ur unable to go through the walls when in gap
-//make it so that you can't go through the green block
 //fix glitch when you try to jump ove the gap after first obstacle appears
 //fix the pause that happens when you jump in a gap

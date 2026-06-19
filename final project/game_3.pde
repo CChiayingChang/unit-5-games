@@ -80,7 +80,7 @@ void game3 () {
     obstacle3Timer=0;//reset timer
   }
   
-  if ((obstacle3X==500 && ballX<390) || (obstacle3X==900 && ballX<390)) {//if you make it past first obstacle, second one will push you in
+  if (obstacle3X==500 && ballX<390) {//if you make it past first obstacle, second one will push you in
     smallObstacle=true;
   }
   if (smallObstacle==true) {

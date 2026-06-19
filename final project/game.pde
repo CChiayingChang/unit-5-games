@@ -138,11 +138,11 @@ void respawn () {
     fill (white);
     circle (ballX, ballY, ballD);
   } else if (respawn==true) {//the character disappears while the timer runs
+    die ();
     timer=timer+1;
     fill (red);
     textSize (150);
     text ("SIKE!", 450, 350);
-    die ();
     obstacleHeight=groundHeight-25;
   }
   if (timer>50) {//once the timer is up, show the character

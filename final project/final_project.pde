@@ -58,7 +58,7 @@ boolean stopJump;//prevents you from being able to jump if you're in a gap
 
 //sound effects
 Minim sounds;
-AudioPlayer click, background, die, door, win;
+AudioPlayer click, background, loselife, door, win;
 PImage trophy;//background for gameover
 
 int deaths;//to count how many times you died in the game
@@ -84,7 +84,7 @@ boolean moveobstacle3;//for movign the big obstacle in level 3
 boolean smallObstacle;//for the 2nd obstacle in level 3
 
 void setup () {
-  mode=game3;
+  mode=game2;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
@@ -127,7 +127,7 @@ void setup () {
   sounds=new Minim (this);
   click=sounds.loadFile ("click.mp3");
   door=sounds.loadFile ("door.mp3");
-  die=sounds.loadFile ("die.mp3");
+  loselife=sounds.loadFile ("loselife.mp3");
   win=sounds.loadFile ("win.mp3");
   background=sounds.loadFile ("background.mp3");
   
@@ -217,8 +217,8 @@ void door () {
 }
 
 void die () {
-  die.rewind ();
-  die.play ();
+  loselife.rewind ();
+  loselife.play ();
 }
 
 void reset1 () {

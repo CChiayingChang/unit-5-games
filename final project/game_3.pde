@@ -97,6 +97,7 @@ void game3 () {
   //the ball gets pushed by the obstacle/can't go through the obstacle
   if (ballY>obstacleY && ballX<obstacleX+50+ballD/2 && ballX>obstacleX) ballX=obstacleX+50+ballD/2;
   if (ballY>obstacleY && ballX<obstacleX && ballX>obstacleX-25) ballX=obstacleX-25;
+  //if (ballX>obstacleX-25 && ballX<obstacleX+50+25 && ballY+25>obstacleY) ballY=obstacleY-25;
   if (obstacleX==350 && ballX==400+ballD/2 && ballY>obstacleY) ballX=450;//if you fall in the gap you can't move sideways
   
   //if you reach the door--------------------------------------------------------------------

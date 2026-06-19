@@ -84,7 +84,7 @@ boolean moveobstacle3;//for movign the big obstacle in level 3
 boolean smallObstacle;//for the 2nd obstacle in level 3
 
 void setup () {
-  mode=game2;
+  mode=intro;
   
   size (900, 700);
   textAlign (CENTER, CENTER); //horizontal, vertical
